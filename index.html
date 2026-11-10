@@ -1,0 +1,1394 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>LPS STEM 比賽統籌 2026–27</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+<style>
+/* Layout: one reading column (max 1100px) under a sticky section bar; two colour-coded tracks
+   (A = 學生 AIoT, B = 教師 Sayo), module codes styled like PCB silkscreen labels. */
+:root{
+  --bg:#F2F4F6; --surface:#FFFFFF; --sunk:#E8ECF0; --ink:#16212C; --muted:#56636F;
+  --line:#D5DCE3; --line-strong:#B9C3CD;
+  --a:#C2410C; --a-soft:#FCEBDD; --b:#0B7A75; --b-soft:#DDF1EF;
+  --crit:#B42318; --crit-soft:#FDE7E4; --gray:#6F7B87; --gray-soft:#E3E8ED;
+  --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1318; --surface:#161D24; --sunk:#1D2630; --ink:#E5EBF0; --muted:#97A4B0;
+    --line:#29343F; --line-strong:#3A4754;
+    --a:#FF8A4C; --a-soft:#3A2416; --b:#3EC6BE; --b-soft:#123230;
+    --crit:#FF7A6B; --crit-soft:#3B1C19; --gray:#8D99A5; --gray-soft:#24303A;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1318; --surface:#161D24; --sunk:#1D2630; --ink:#E5EBF0; --muted:#97A4B0;
+  --line:#29343F; --line-strong:#3A4754;
+  --a:#FF8A4C; --a-soft:#3A2416; --b:#3EC6BE; --b-soft:#123230;
+  --crit:#FF7A6B; --crit-soft:#3B1C19; --gray:#8D99A5; --gray-soft:#24303A;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{
+  background:var(--bg);color:var(--ink);font-family:var(--f-body);
+  font-size:15px;line-height:1.7;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+  padding-block:0 48px;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1100px;margin:0 auto}
+a{color:inherit;text-underline-offset:3px}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--b);outline-offset:2px;border-radius:4px}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+h1,h2,h3,h4{text-wrap:balance;line-height:1.3;margin:0}
+p{margin:0}
+ul,ol{margin:0;padding-left:1.3em}
+li+li{margin-top:4px}
+
+/* Header */
+.hero{padding-block:36px 24px;display:grid;gap:18px}
+.eyebrow{font-size:12.5px;letter-spacing:.08em;color:var(--muted);font-weight:500}
+.hero h1{font-size:clamp(28px,5vw,44px);font-weight:900;letter-spacing:.01em}
+.hero h1 .slash{color:var(--a)}
+.lead{max-width:68ch;color:var(--muted);font-size:16px}
+.lead b{color:var(--ink);font-weight:700}
+
+.alert{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;background:var(--crit-soft);border:1px solid var(--crit);border-radius:var(--r);padding:14px 16px}
+.alert .dot{width:10px;height:10px;border-radius:50%;background:var(--crit);margin-top:8px}
+.alert p{min-width:0}
+.alert strong{color:var(--crit)}
+
+.count-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.count{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:grid;gap:4px;min-width:0}
+.count .what{font-size:13px;color:var(--muted);font-weight:500}
+.count .days{font-family:var(--f-mono);font-size:30px;font-weight:700;line-height:1.1}
+.count .days small{font-size:14px;font-weight:500;margin-left:4px;color:var(--muted)}
+.count .when{font-family:var(--f-mono);font-size:12.5px;color:var(--muted)}
+.count.crit .days{color:var(--crit)}
+.count.a .days{color:var(--a)}
+.count.b .days{color:var(--b)}
+
+/* Sticky nav */
+.secnav{position:sticky;top:env(safe-area-inset-top, 0px);z-index:9;background:var(--bg);border-bottom:1px solid var(--line);
+  margin-left:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));margin-right:calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.secnav .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding-block:8px}
+.secnav .wrap::-webkit-scrollbar{display:none}
+.secnav a{flex:none;text-decoration:none;font-size:13.5px;font-weight:500;padding:6px 10px;border-radius:6px;color:var(--muted);white-space:nowrap}
+.secnav a:hover{background:var(--sunk);color:var(--ink)}
+.secnav a.a{color:var(--a)} .secnav a.b{color:var(--b)}
+
+/* Sections */
+section.sec{padding-block:40px 8px;display:grid;gap:20px}
+.sec-head{display:grid;gap:6px;border-bottom:2px solid var(--ink);padding-bottom:10px}
+.sec-head .k{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;color:var(--muted);font-weight:700}
+.sec-head h2{font-size:clamp(22px,3.4vw,28px);font-weight:900}
+.sec-head .sub{color:var(--muted);font-size:14px}
+.sec.a .sec-head{border-color:var(--a)} .sec.a .sec-head .k{color:var(--a)}
+.sec.b .sec-head{border-color:var(--b)} .sec.b .sec-head .k{color:var(--b)}
+h3{font-size:19px;font-weight:700}
+h4{font-size:15.5px;font-weight:700}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+.grid2>*{min-width:0}
+.stack{display:grid;gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:grid;gap:12px;align-content:start;min-width:0}
+.card.flat{background:transparent}
+.tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.04em;padding:2px 8px;border-radius:4px;justify-self:start}
+.tag.a{background:var(--a-soft);color:var(--a)} .tag.b{background:var(--b-soft);color:var(--b)}
+.tag.g{background:var(--gray-soft);color:var(--gray)} .tag.c{background:var(--crit-soft);color:var(--crit)}
+
+dl.facts{display:grid;grid-template-columns:7.5em 1fr;gap:8px 14px;margin:0}
+dl.facts dt{color:var(--muted);font-size:13.5px;font-weight:500;padding-top:1px}
+dl.facts dd{margin:0;min-width:0}
+@media (max-width:480px){dl.facts{grid-template-columns:1fr;gap:2px}dl.facts dd{margin-bottom:8px}}
+
+.callout{border:1px solid var(--line-strong);border-radius:var(--r);padding:14px 16px;display:grid;gap:8px;background:var(--sunk)}
+.callout.a{background:var(--a-soft);border-color:var(--a)}
+.callout.b{background:var(--b-soft);border-color:var(--b)}
+.callout h4{font-size:15px}
+
+/* Tables */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:none}
+thead th{background:var(--sunk);font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.03em;white-space:nowrap}
+td.nowrap,th.nowrap{white-space:nowrap}
+.io td:nth-child(1){font-weight:700;min-width:7.5em}
+.io td{min-width:9em}
+
+/* Module chips — silkscreen look */
+.mod{display:inline-block;font-family:var(--f-mono);font-size:11.5px;font-weight:700;line-height:1.5;border:1.5px solid currentColor;border-radius:3px;padding:0 5px;color:var(--a);white-space:nowrap;vertical-align:1px}
+.mod.u{color:var(--b)}
+.mods{display:flex;flex-wrap:wrap;gap:4px}
+
+/* Score bars */
+.bars{display:grid;gap:10px}
+.bar-row{display:grid;grid-template-columns:6.5em 1fr 3em;gap:10px;align-items:center;font-size:14px}
+.bar-track{height:12px;background:var(--sunk);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;background:var(--a);border-radius:3px}
+.bar-row .v{font-family:var(--f-mono);font-weight:700;text-align:right}
+
+/* Module grid */
+.mod-group{display:grid;gap:10px}
+.mod-group>h4{font-size:13px;color:var(--muted);letter-spacing:.06em}
+.mod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.mcard{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px;display:grid;gap:6px;align-content:start;min-width:0}
+.mcard .top{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.mcard .name{font-weight:700;font-size:14.5px}
+.mcard .spec{font-size:13px;color:var(--muted)}
+.mcard .use{font-size:13px}
+.mcard .use::before{content:"比賽用途　";color:var(--a);font-weight:700;font-size:12px}
+.mcard.detach{border-style:dashed;border-color:var(--a)}
+
+/* Idea cards */
+.idea{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px;display:grid;gap:16px;min-width:0}
+.idea-head{display:grid;gap:6px}
+.idea-head .num{font-family:var(--f-mono);font-size:12.5px;font-weight:700;color:var(--a);letter-spacing:.08em}
+.idea-head h3{font-size:clamp(20px,3vw,24px);font-weight:900}
+.idea-head .pitch{font-size:15.5px;color:var(--muted);max-width:70ch}
+.idea-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.idea-meta>div{background:var(--sunk);border-radius:8px;padding:12px 14px;min-width:0}
+.idea-meta .lbl{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.05em;display:block;margin-bottom:2px}
+.idea-foot{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.idea-foot>div{border-top:2px solid var(--line);padding-top:10px;min-width:0}
+.idea-foot .lbl{font-size:12.5px;font-weight:700;color:var(--a);display:block;margin-bottom:4px}
+
+/* Steps */
+ol.steps{list-style:none;padding:0;margin:0;display:grid;gap:10px;counter-reset:s}
+ol.steps>li{counter-increment:s;display:grid;grid-template-columns:2.4em 1fr;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:0}
+ol.steps>li::before{content:counter(s,decimal-leading-zero);font-family:var(--f-mono);font-weight:700;color:var(--a);font-size:15px;line-height:1.6}
+ol.steps.b>li::before{color:var(--b)}
+ol.steps>li>div{min-width:0}
+ol.steps b{display:block}
+
+/* Checklist */
+.check{display:grid;gap:6px}
+.check label{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start;padding:8px 10px;border-radius:6px;cursor:pointer}
+.check label:hover{background:var(--sunk)}
+.check input{width:18px;height:18px;margin:3px 0 0;accent-color:var(--a)}
+.check label.done span{color:var(--muted);text-decoration:line-through}
+.check .when{font-family:var(--f-mono);font-size:12px;font-weight:700;color:var(--a);margin-right:6px}
+.check .when.c{color:var(--crit)}
+
+/* Copy fields */
+.copyline{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--sunk);border-radius:6px;padding:6px 6px 6px 10px}
+.copyline code{font-family:var(--f-mono);font-size:13px;flex:1 1 220px;min-width:0;overflow-wrap:anywhere;user-select:all}
+.btn{font:inherit;font-size:12.5px;font-weight:700;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);border-radius:5px;padding:4px 10px;cursor:pointer;flex:none}
+.btn:hover{border-color:var(--ink)}
+
+/* Gantt */
+.gantt-box{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.gantt{--lw:210px;min-width:780px;position:relative;padding-bottom:6px}
+.g-row{display:grid;grid-template-columns:var(--lw) 1fr;min-height:34px;border-bottom:1px solid var(--line)}
+.g-row:last-child{border-bottom:none}
+.g-row.grp{min-height:28px;background:var(--sunk)}
+.g-row.grp .g-lbl{font-size:12px;font-weight:700;letter-spacing:.06em}
+.g-lbl{padding:6px 12px;font-size:13px;line-height:1.35;display:grid;align-content:center;border-right:1px solid var(--line)}
+.g-lbl small{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.g-trk{position:relative}
+.g-bar{position:absolute;top:50%;height:12px;transform:translateY(-50%);border-radius:3px;min-width:4px}
+.g-bar.a{background:var(--a)} .g-bar.b{background:var(--b)} .g-bar.g{background:var(--gray)}
+.g-bar.win{height:8px;opacity:.35}
+.g-ms{position:absolute;top:50%;width:11px;height:11px;transform:translate(-50%,-50%) rotate(45deg);border:2px solid var(--surface)}
+.g-ms.a{background:var(--a)} .g-ms.b{background:var(--b)} .g-ms.g{background:var(--gray)} .g-ms.c{background:var(--crit)}
+.g-ms-l{position:absolute;top:50%;transform:translate(8px,-50%);font-family:var(--f-mono);font-size:10.5px;color:var(--muted);white-space:nowrap}
+.g-head{display:grid;grid-template-columns:var(--lw) 1fr;border-bottom:1px solid var(--line-strong)}
+.g-head .g-trk{height:30px}
+.g-month{position:absolute;top:0;bottom:0;border-left:1px solid var(--line);font-family:var(--f-mono);font-size:11px;color:var(--muted);padding:7px 0 0 6px;white-space:nowrap}
+.g-grid{position:absolute;top:0;bottom:0;left:var(--lw);right:0;pointer-events:none}
+.g-grid .ln{position:absolute;top:30px;bottom:0;border-left:1px dashed var(--line)}
+.g-grid .today{position:absolute;top:0;bottom:0;border-left:2px solid var(--crit)}
+.g-grid .today span{position:absolute;top:2px;left:4px;font-family:var(--f-mono);font-size:10.5px;font-weight:700;color:var(--crit);background:var(--surface);padding:0 3px;white-space:nowrap}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{display:inline-block;width:14px;height:8px;border-radius:2px}
+.legend i.d{width:9px;height:9px;transform:rotate(45deg);border-radius:0}
+
+/* Links */
+.links{display:grid;gap:6px}
+.link{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 14px}
+.link:hover{border-color:var(--ink)}
+.link b{font-size:14.5px;min-width:0}
+.link span{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);grid-column:1;overflow-wrap:anywhere;min-width:0}
+.link i{font-style:normal;grid-row:1 / span 2;grid-column:2;font-size:12px;font-weight:700;color:var(--muted)}
+.link.key{border-color:var(--a)}
+.link.key i{color:var(--a)}
+.link.keyb{border-color:var(--b)}
+.link.keyb i{color:var(--b)}
+
+/* Pain points & proposals */
+ul.req{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px}
+ul.req li{margin:0;font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px 12px}
+ul.req li::before{content:"✓ ";color:var(--a);font-weight:700}
+.theme{display:grid;gap:16px;padding-top:12px;scroll-margin-top:64px}
+.theme-head{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:18px}
+.theme-head .tn{font-family:var(--f-mono);font-weight:700;font-size:12.5px;letter-spacing:.08em;color:var(--surface);background:var(--a);padding:2px 8px;border-radius:4px}
+.theme-head h3{font-size:clamp(20px,3vw,24px);font-weight:900}
+.pp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
+.pp{background:var(--sunk);border-radius:8px;padding:12px 14px;display:grid;gap:4px;align-content:start;min-width:0}
+.pp .row{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.pp .code{font-family:var(--f-mono);font-size:12px;font-weight:700;color:var(--muted);border:1.5px solid currentColor;border-radius:3px;padding:0 5px}
+.pp .stat{font-family:var(--f-mono);font-size:21px;font-weight:700;color:var(--crit);line-height:1.2;white-space:nowrap}
+.pp .stat small{font-size:12px;color:var(--muted)}
+.pp h4{font-size:14.5px}
+.pp p{font-size:13px;color:var(--muted)}
+.pp p.src{font-size:11.5px}
+.props{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:14px}
+.prop{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:grid;gap:10px;align-content:start;min-width:0}
+.prop.pick{border:2px solid var(--a)}
+.prop.pick2{border:2px dashed var(--b)}
+.prop-top{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.pid{font-family:var(--f-mono);font-weight:700;font-size:12.5px;color:var(--surface);background:var(--ink);padding:1px 7px;border-radius:4px;white-space:nowrap}
+.pts{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);margin-left:auto}
+.prop h4{font-size:17px;font-weight:900}
+.prop .where{font-size:13px;color:var(--muted);margin-top:-6px}
+.prop>p{font-size:14px}
+table.pio{font-size:13px}
+table.pio td{padding:7px 10px}
+table.pio td:first-child{font-weight:700;white-space:nowrap}
+table.pio td:nth-child(2){min-width:7.5em}
+table.pio .mod{margin:1px 3px 1px 0}
+.prop .foot{font-size:12.5px;color:var(--muted);line-height:1.8}
+.prop .foot b{color:var(--ink);font-weight:700;margin-right:4px}
+.dots{font-family:var(--f-mono);letter-spacing:1px;color:var(--a)}
+table.matrix td{white-space:nowrap}
+table.matrix td:nth-child(n+4):nth-child(-n+7){font-family:var(--f-mono);color:var(--a);letter-spacing:1px}
+table.matrix tr.hl td{background:var(--a-soft)}
+table.matrix tr.hl2 td{background:var(--b-soft)}
+.draftbox{display:grid;gap:6px}
+.draft-head{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.copyline.draft{padding:10px 12px}
+.copyline.draft code{font-family:var(--f-body);font-size:14px;line-height:1.75;flex-basis:100%}
+details.srcs{border:1px solid var(--line);border-radius:var(--r);padding:10px 14px;background:var(--surface)}
+details.srcs summary{cursor:pointer;font-weight:700;font-size:14px}
+details.srcs ul{margin-top:8px}
+
+/* Quick links */
+.quick-wrap{display:grid;gap:8px}
+.quick{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.qlink{display:grid;gap:2px;align-content:start;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;min-width:0}
+.qlink:hover{border-color:var(--ink)}
+.qlink .ql-k{font-size:12px;font-weight:700;letter-spacing:.04em}
+.qlink.a .ql-k{color:var(--a)} .qlink.b .ql-k{color:var(--b)}
+.qlink b{font-size:15px}
+.qlink .d{font-family:var(--f-mono);font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+
+footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted);display:grid;gap:4px}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">廖寶珊紀念書院 · AI／STEM 統籌 · 資料整理至 2026-11-10</div>
+    <h1>STEM<span class="slash">／</span>AI 比賽統籌 2026–27</h1>
+    <p class="lead"><b>A 學生組</b>「三十港章 慧智北都」AIoT 模型設計比賽（城大 × 津中議會 × 中文中學聯會，小米設備）及 <b>B 教師組</b> Sayo AI 創新教學應用大賽（Vibe Coding）。比賽資料、三個作品構思、製作流程、統籌時間線及所有報名／繳交連結。</p>
+    <div class="alert" role="note">
+      <div class="dot" aria-hidden="true"></div>
+      <p><strong>學生比賽報名 11 月 13 日（五）下午 6:00 截止，先到先得。</strong>報名表要填齊隊員中英文姓名及電郵，交表後不可增加或更換隊員；「人車家生態微景」只限 6 隊。建議 <b>11 月 12 日（四）</b>前遞交。</p>
+    </div>
+    <div class="count-row">
+      <div class="count crit">
+        <span class="what">A 學生比賽報名截止</span>
+        <span class="days" data-deadline="2026-11-13">3<small>日</small></span>
+        <span class="when">2026-11-13（五）18:00</span>
+      </div>
+      <div class="count b">
+        <span class="what">B Sayo 教師作品截止</span>
+        <span class="days" data-deadline="2026-11-30">20<small>日</small></span>
+        <span class="when">2026-11-30（一）23:59</span>
+      </div>
+      <div class="count a">
+        <span class="what">A 學生作品網上提交截止</span>
+        <span class="days" data-deadline="2027-03-05">115<small>日</small></span>
+        <span class="when">2027-03-05（五）18:00</span>
+      </div>
+    </div>
+    <div class="quick-wrap">
+      <div class="eyebrow">報名及繳交連結</div>
+      <div class="quick">
+        <a class="qlink a" href="https://docs.google.com/forms/d/e/1FAIpQLSdPujojp8c0FD4tCDd4vWZXnSRa5nbDKkJguN37jE4mttb5aw/viewform" target="_blank" rel="noopener"><span class="ql-k">A 學生 · 報名</span><b>中學組報名表</b><span class="d">截止 2026-11-13（五）18:00</span></a>
+        <a class="qlink a" href="https://www.cityu.edu.hk/skltmw/AIot_Comp/submission.html" target="_blank" rel="noopener"><span class="ql-k">A 學生 · 繳交</span><b>作品提交及匯報</b><span class="d">2027-01-05 至 03-05 18:00；Drive 文件夾連結電郵 vpceaiotcomp@gapps.cityu.edu.hk</span></a>
+        <a class="qlink b" href="https://sayo.ai/zh-HK/sign-in" target="_blank" rel="noopener"><span class="ql-k">B 教師 · 註冊及繳交</span><b>登入 Sayo.ai 創作及提交</b><span class="d">學校電郵登入；截止 2026-11-30（一）23:59</span></a>
+        <a class="qlink b" href="https://docs.google.com/forms/d/e/1FAIpQLSdlGrn8smru6vwP43SokpiSQcyaKG_NnxQoyrqdTEDpfYMU0Q/viewform" target="_blank" rel="noopener"><span class="ql-k">B 教師 · 簡介會</span><b>教師線上簡介會報名</b><span class="d">11/18、11/27 16:00；每場 1 小時 CPD</span></a>
+      </div>
+    </div>
+  </header>
+</div>
+
+<nav class="secnav" aria-label="章節">
+  <div class="wrap">
+    <a href="#overview">總覽</a>
+    <a href="#timeline">統籌時間線</a>
+    <a class="a" href="#student">A 學生比賽</a>
+    <a class="a" href="#kit">小米設備</a>
+    <a class="a" href="#ideas">痛點及方案</a>
+    <a class="a" href="#build">製作流程</a>
+    <a class="b" href="#teacher">B 教師比賽</a>
+    <a href="#links">連結總表</a>
+    <a href="#open-questions">待確認</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ============ OVERVIEW ============ -->
+<section class="sec" id="overview">
+  <div class="sec-head">
+    <span class="k">OVERVIEW</span>
+    <h2>總覽及本週行動</h2>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <span class="tag a">A · 學生比賽</span>
+      <h3>「三十港章 慧智北都」AIoT 模型設計比賽</h3>
+      <dl class="facts">
+        <dt>主辦</dt><dd>香港津貼中學議會、香港中文中學聯會、香港城市大學；小米集團贊助</dd>
+        <dt>參賽</dt><dd>中學生 2–4 人一隊、同校；每校最多 <b>2 隊</b>；全港中學組 100 隊</dd>
+        <dt>作品</dt><dd>可演示的實體模型／互動展示裝置，≤ <span class="mono">1 m × 1 m × 1.5 m</span>，主題「未來北部都會區發展」</dd>
+        <dt>設備</dt><dd>大會借出小米 AIoT 開發平台（或人車家生態微景），賽後歸還</dd>
+        <dt>繳交</dt><dd>作品名稱 + 100 字簡介 + ≤ 5 分鐘 MP4（中英字幕），Google Drive 文件夾連結電郵；3 月 13 日帶模型及海報匯報</dd>
+        <dt>獎項</dt><dd>每個題目：一等 2、二等 3、三等 4 + 優異；一等獎包括北京遊學團（參觀小米汽車超級工廠）</dd>
+      </dl>
+    </div>
+    <div class="card">
+      <span class="tag b">B · 教師比賽</span>
+      <h3>Sayo AI 創新教學應用大賽 2026</h3>
+      <dl class="facts">
+        <dt>主辦</dt><dd>Sayo AI（Sayo Academy）；香港津貼中學議會、ACTiCT、HKT 等支持</dd>
+        <dt>參賽</dt><dd>全港中小學教師；LPS 屬<b>中學賽道</b>（中一至中六）</dd>
+        <dt>類別</dt><dd>語文／人文藝術／數理科學／行政與營運，可跨類別，每類別限 1 項</dd>
+        <dt>作品</dt><dd>在 Sayo.ai 以自然語言（vibe coding）製作的教學應用</dd>
+        <dt>繳交</dt><dd>在 Sayo.ai 提交 Sayo 應用連結；<b>同一類別只計首次提交</b></dd>
+        <dt>獎項</dt><dd>每類別 冠 HK$2,000、亞 HK$1,000、季 HK$1,000；提交合資格作品獲 3 小時 CPD</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+      <h3>本週行動清單（11 月 10–13 日）</h3>
+      <span class="small muted">剔選只儲存在你的瀏覽器</span>
+    </div>
+    <div class="check" id="checklist">
+      <label><input type="checkbox" id="ck1"><span><span class="when">10/11</span>向校長／STEM 科主任確認參加學生比賽，定負責老師</span></label>
+      <label><input type="checkbox" id="ck2"><span><span class="when">10/11</span>16:00 參加 Sayo 簡介會（或報 18/11、27/11 場），以學校電郵登入 Sayo.ai</span></label>
+      <label><input type="checkbox" id="ck3"><span><span class="when">11/11</span>招募 4–8 名學生組 2 隊；確認每隊過半數可出席工作坊一（29/11 或 30/11）及工作坊二（4/12 或 5/12）</span></label>
+      <label><input type="checkbox" id="ck4"><span><span class="when">11/11</span>確認每隊最少 1 人能用中文（工作坊以普通話進行）</span></label>
+      <label><input type="checkbox" id="ck5"><span><span class="when">11/11</span>收集隊員中英文姓名及電郵（交表後不可更換）</span></label>
+      <label><input type="checkbox" id="ck6"><span><span class="when">11/11</span>兩隊各選一個方案（建議：隊 A 1-A 銀齡安居、隊 B 3-A 智慧路口；見「痛點及方案」）</span></label>
+      <label><input type="checkbox" id="ck7"><span><span class="when c">12/11</span>遞交中學組報名表 ×2；隊 A 表明想用「人車家生態微景」</span></label>
+      <label><input type="checkbox" id="ck8"><span><span class="when">13/11</span>發家長通知及同意書（城大校外工作坊、大會拍攝錄影）</span></label>
+      <label><input type="checkbox" id="ck9"><span><span class="when">20/11</span>未收確認信及隊伍編號 → 致電 3895 3790 查詢</span></label>
+      <label><input type="checkbox" id="ck11"><span><span class="when">16/11</span>安排兩隊觀看簡介會錄影的北都發展及小米 AIoT 應用兩節，各交一頁筆記</span></label>
+      <label><input type="checkbox" id="ck10"><span><span class="when">11/11</span>將 Sayo 比賽轉發各科組，每個類別邀請 1 位同事參加</span></label>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TIMELINE ============ -->
+<section class="sec" id="timeline">
+  <div class="sec-head">
+    <span class="k">TIMEFRAME</span>
+    <h2>統籌時間線</h2>
+    <p class="sub">2026 年 11 月至 2027 年 4 月；◆ 為截止日或活動日，紅線為今日。</p>
+  </div>
+  <div class="legend">
+    <span><i style="background:var(--a)"></i>A 學生比賽</span>
+    <span><i style="background:var(--b)"></i>B 教師比賽</span>
+    <span><i style="background:var(--gray)"></i>校務／假期</span>
+    <span><i class="d" style="background:var(--crit)"></i>正式截止</span>
+  </div>
+  <div class="gantt-box"><div class="gantt" id="gantt"></div></div>
+
+  <h3>逐週安排</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th class="nowrap">時段</th><th>A 學生比賽</th><th>B 教師比賽</th></tr></thead>
+      <tbody>
+        <tr><td class="nowrap mono">11/10–11/13</td><td>招募、組隊、確認工作坊出席；<b>11/12 前交報名表 ×2</b>；11/13 18:00 截止</td><td>11/10 16:00 簡介會；登入 Sayo.ai，決定類別及構思</td></tr>
+        <tr><td class="nowrap mono">11/16–11/20</td><td>一星期內收確認信及隊伍編號；兩隊觀看簡介會錄影（北都發展、小米 AIoT 應用兩節）；搜集北都資料（四大區、宜居宜業宜遊）；定構思</td><td>11/18 16:00 簡介會（可選）；在 Sayo 內完成 v1</td></tr>
+        <tr><td class="nowrap mono">11/23–11/28</td><td>草圖及 I/O 對照表；手提電腦預備；分配工作坊場次</td><td>課堂試用、收學生回饋 → v2；11/27 簡介會（行政工具）；<b>11/28 定稿，一次過提交</b></td></tr>
+        <tr><td class="nowrap mono">11/29–12/05</td><td>工作坊一（11/29 日 10:00 或 11/30 一 16:30）<b>領設備</b>；工作坊二（12/4 五 16:30 或 12/5 六 10:00）</td><td>11/30（一）23:59 正式截止；避免與當日下午工作坊撞期</td></tr>
+        <tr><td class="nowrap mono">12/07–12/18</td><td>開箱盤點、逐塊子板測試；12/12 校內協辦 HKJPSMC，當週暫停課後練習</td><td>評審期</td></tr>
+        <tr><td class="nowrap mono">聖誕假</td><td>原型衝刺：核心 3 個互動跑通</td><td>—</td></tr>
+        <tr><td class="nowrap mono">2027 年 1 月</td><td>1/5 提交窗口開；實體模型製作及整合；上學期考試期間暫停</td><td>得獎公布及頒獎典禮</td></tr>
+        <tr><td class="nowrap mono">2027 年 2 月</td><td>農曆新年後優化、拍片、加中英字幕；<b>2/26（五）校內完成提交</b></td><td>—</td></tr>
+        <tr><td class="nowrap mono">2027 年 3 月</td><td><b>3/5（五）18:00 正式截止</b>；3/6–3/12 海報及匯報綵排；3/13（六）作品匯報</td><td>—</td></tr>
+        <tr><td class="nowrap mono">2027 年 4 月</td><td>4/24（六）頒獎典禮（簡介會簡報亦列 5/15，待確認）；按指示歸還設備</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ A: STUDENT ============ -->
+<section class="sec a" id="student">
+  <div class="sec-head">
+    <span class="k">A · 學生比賽</span>
+    <h2>「三十港章 慧智北都」AIoT 模型設計比賽</h2>
+    <p class="sub">HKSAR 30th Anniversary Smart-Tech Design Competition: AIoT for Northern Metropolis · 2026/27「心繫家國」聯校國民教育活動</p>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>比賽內容</h3>
+      <dl class="facts">
+        <dt>任務</dt><dd>用小米 AIoT 開發設備（硬件及軟件）製作「未來北部都會區發展」實體模型或互動展示裝置，展現北都「宜居、宜業、宜遊」，融入智慧城市、綠色生活或創科產業元素</dd>
+        <dt>北都數字</dt><dd><span class="mono">3,000</span> 公頃可發展土地 · <span class="mono">250</span> 萬人口 · <span class="mono">65</span> 萬職位</dd>
+        <dt>可參考地區</dt><dd>創科地帶：新田科技城、河套港深創科園；新發展區：古洞北／粉嶺北、洪水橋／厦村、元朗南</dd>
+        <dt>支持機構</dt><dd>HKACE、AiTLE、香港遊樂場協會、小米（江蘇）產教融合基地</dd>
+        <dt>查詢（中學組）</dt><dd><span class="mono">3895 3790</span> · <span class="mono">info@hksssc.edu.hk</span></dd>
+      </dl>
+    </div>
+    <div class="card">
+      <h3>評分準則</h3>
+      <div class="bars">
+        <div class="bar-row"><span>內容設計</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="v">20%</span></div>
+        <div class="bar-row"><span>作品完整性</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="v">25%</span></div>
+        <div class="bar-row"><span>創意度</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="v">25%</span></div>
+        <div class="bar-row"><span>技術應用</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="v">20%</span></div>
+        <div class="bar-row"><span>演繹技巧</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="v">10%</span></div>
+      </div>
+      <p class="small muted">完整性與創意度合共一半分數：互動要真正跑得通，比堆砌功能更重要。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+      <h3>比賽簡介會（2026-10-20，網上）</h3>
+      <span class="small muted">簡報 19 頁已逐頁核對，與章程一致</span>
+    </div>
+    <div class="tbl">
+      <table>
+        <thead><tr><th class="nowrap">環節</th><th>講者</th><th>對學生的用途</th></tr></thead>
+        <tbody>
+          <tr><td class="nowrap"><b>01　比賽主題及內容</b></td><td>活動籌委會代表</td><td>規則、主題、設備、日程、評分、獎項（本頁已全部整理）</td></tr>
+          <tr><td class="nowrap"><b>02　北部都會區發展</b></td><td>郭凱傑先生（團結香港基金副研究總監）</td><td>選址及「與北都發展的關聯」的論據來源，直接影響 100 字簡介及內容設計分</td></tr>
+          <tr><td class="nowrap"><b>03　小米 AIoT 創新應用</b></td><td>小米集團技術委員會：雍德鈺先生（產教融合總經理）、馬一丁女士（商務總監）、張月女士（商務經理）</td><td>了解設備可實現的應用場景，幫助判斷構思是否做得到</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="small">簡報中 02、03 兩節只有標題頁，北都藍圖及小米應用的實質內容只在<a href="https://drive.google.com/file/d/1649G3RyDM3ZLaT4de1Bh8tWv8T7JRwvf/view" target="_blank" rel="noopener">簡介會錄影</a>。建議 11 月 16–20 日安排兩隊觀看這兩節並做筆記，作為構思定案依據。</p>
+  </div>
+
+  <h3>主題及設備分配</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th class="nowrap">主題（擇一）</th><th>範圍</th><th>中學組設備</th></tr></thead>
+      <tbody>
+        <tr><td class="nowrap"><b>1　智在人生</b></td><td>智慧機械人及 AIoT 在日常生活的創新應用，例如智慧家居、輔助科技</td><td>人車家生態微景（限 6 隊，先到先得）<b>或</b> Xiaomi AIoT 開發平台</td></tr>
+        <tr><td class="nowrap"><b>2　綠智社區</b></td><td>以 AIoT 做資源管理、環境監測、社區互動，推動綠色低碳生活</td><td>Xiaomi AIoT 開發平台</td></tr>
+        <tr><td class="nowrap"><b>3　智慧基建</b></td><td>AIoT 於交通、能源、大型設施管理；結合數據分析與自動化控制</td><td>Xiaomi AIoT 開發平台</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small muted">微景名額滿會自動改配開發平台，籌委會會致電或電郵確認設備偏好；最終設備以確認信為準。</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>比賽規則重點</h3>
+      <ul>
+        <li>每隊 2–4 人，須就讀同一中學；報名後不可增加或更換隊員</li>
+        <li>至少 1 名隊員能用中文：培訓及套件大部分為中文</li>
+        <li>作品必須運用小米 AIoT 設備製作，賽後歸還所有設備；人為損壞會按程度跟進</li>
+        <li>作品須可演示，尺寸 ≤ 1 m × 1 m × 1.5 m</li>
+        <li>每隊只交 1 份作品；一經提交不得修改，逾時不受理</li>
+        <li>原創及未發佈；圖片、聲音、影片、程式碼須原創、已授權或無版權</li>
+        <li>不得含挑釁、毀謗、暴力、歧視等不當內容</li>
+        <li>主辦會拍照錄影，並用於活動記錄及宣傳</li>
+      </ul>
+    </div>
+    <div class="callout a">
+      <h4>工作坊須知（地點：香港城市大學）</h4>
+      <ul>
+        <li><b>比賽工具於工作坊一現場派發</b></li>
+        <li>每隊須有<b>不少於一半組員</b>出席工作坊一及二，缺席即取消資格</li>
+        <li>每個工作坊選一節：平日班或周末班，名額先到先得，詳情見確認信</li>
+        <li>以普通話進行，螢幕有英文即時字幕</li>
+        <li>每隊自備最少 1 部手提電腦及充電器</li>
+      </ul>
+      <div class="tbl" style="background:var(--surface)">
+        <table>
+          <thead><tr><th>工作坊</th><th>周末班</th><th>平日班</th></tr></thead>
+          <tbody>
+            <tr><td class="nowrap">一（領設備）</td><td class="mono nowrap">11/29（日）10:00–12:00</td><td class="mono nowrap">11/30（一）16:30–18:30</td></tr>
+            <tr><td class="nowrap">二</td><td class="mono nowrap">12/5（六）10:00–12:00</td><td class="mono nowrap">12/4（五）16:30–18:30</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>作品繳交要求（2027-01-05 至 03-05 18:00）</h3>
+    <div class="grid2">
+      <div class="stack">
+        <h4>提交清單</h4>
+        <ol>
+          <li><b>作品名稱</b></li>
+          <li><b>作品簡介</b>：100 字以內，寫設計概念、應用技術、與北都發展的關聯；中文或英文</li>
+          <li><b>影片演繹</b>：MP4，5 分鐘以內，展示模型運作及互動功能，<b>須有中英文字幕</b></li>
+        </ol>
+        <h4>3 月 13 日（六）作品匯報</h4>
+        <p>每隊提交模型作品並作海報展示；地點及要求稍後公布。</p>
+      </div>
+      <div class="stack">
+        <h4>提交方法</h4>
+        <p class="small muted">1. 三項放入同一個 Google Drive 文件夾，命名：</p>
+        <div class="copyline"><code>隊伍編號_廖寶珊紀念書院</code><button class="btn" data-copy="隊伍編號_廖寶珊紀念書院">複製</button></div>
+        <p class="small muted">2. 將整個文件夾的共享連結電郵至：</p>
+        <div class="copyline"><code>vpceaiotcomp@gapps.cityu.edu.hk</code><button class="btn" data-copy="vpceaiotcomp@gapps.cityu.edu.hk">複製</button></div>
+        <p class="small muted">3. 電郵主旨：</p>
+        <div class="copyline"><code>隊伍編號 _『三十港章 慧智北都』AIoT模型設計比賽</code><button class="btn" data-copy="隊伍編號 _『三十港章 慧智北都』AIoT模型設計比賽">複製</button></div>
+        <p class="small muted">4. 電郵內文：學校名稱及所有隊員姓名。</p>
+        <p class="small">寄出前把文件夾設為「知道連結的人可檢視」，再用無痕視窗開一次測試。</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>獎項（中學組，每個題目）</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>獎項</th><th class="nowrap">名額</th><th>獎品</th></tr></thead>
+      <tbody>
+        <tr><td class="nowrap"><b>一等獎</b></td><td class="mono">2</td><td>獎杯、獎狀、智能家電、數碼產品及北京遊學團（包括參觀小米汽車超級工廠）</td></tr>
+        <tr><td class="nowrap"><b>二等獎</b></td><td class="mono">3</td><td>獎杯、獎狀、智能家電及數碼產品</td></tr>
+        <tr><td class="nowrap"><b>三等獎</b></td><td class="mono">4</td><td>獎杯、獎狀、智能家電及數碼產品</td></tr>
+        <tr><td class="nowrap"><b>優異獎</b></td><td>多個</td><td>獎杯、獎狀、智能家電及數碼產品禮券</td></tr>
+        <tr><td class="nowrap"><b>特別獎</b></td><td>各 1</td><td>跨組別：最佳智慧城市應用獎、最具北部都會區前瞻獎、評審特別推薦獎、最積極參與隊伍獎；獎狀及智能家電、數碼產品禮券</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small muted">優勝隊伍須在頒獎典禮分享學習成果；典禮日期簡介會簡報列 2027-04-24（六）或 05-15（六），比賽網站列 04-24，以最新通知為準。</p>
+</section>
+
+<!-- ============ KIT ============ -->
+<section class="sec a" id="kit">
+  <div class="sec-head">
+    <span class="k">A · 比賽設備</span>
+    <h2>小米設備拆解</h2>
+    <p class="sub">中學組主要用 Xiaomi AIoT 開發平台（實訓箱）：一塊 M1 基座母板，加上可堆疊替換的功能子板。虛線框的子板感應器可以取出、調校角度，最適合嵌入模型。</p>
+  </div>
+
+  <div class="mod-group">
+    <h4>主控及母板</h4>
+    <div class="mod-grid">
+      <div class="mcard"><div class="top"><span class="mod u">M1</span><span class="name">基座母板</span></div><p class="spec">供電管理、系統互聯、通信中繼；多塊母板可無線組網成分散式系統</p><p class="use">藏於模型底座作控制中心</p></div>
+      <div class="mcard"><div class="top"><span class="mod u">U1P</span><span class="name">GD32F470 主控</span></div><p class="spec">Arm Cortex-M4 240 MHz、3 MB Flash、256 KB RAM、FPU；SPI／GPIO／RS485／UART</p><p class="use">即時控制：燈、風扇、窗簾、按鍵</p></div>
+      <div class="mcard"><div class="top"><span class="mod u">U2P</span><span class="name">地平線旭日 X3M</span></div><p class="spec">5 TOPS 端側推理、4 核 Arm A53、2 GB RAM、16 GB eMMC</p><p class="use">AI 主控：影像辨識、語音、數據處理</p></div>
+    </div>
+  </div>
+
+  <div class="mod-group">
+    <h4>通訊及擴展</h4>
+    <div class="mod-grid">
+      <div class="mcard"><div class="top"><span class="mod">C2</span><span class="name">Zigbee</span></div><p class="spec">E18-MS1-PCB 模組，串口 AT 指令設定連接</p><p class="use">多個感測節點低功耗組網</p></div>
+      <div class="mcard"><div class="top"><span class="mod">C3</span><span class="name">Wi-Fi + BLE</span></div><p class="spec">ESP-WROOM-32 模組，Wi-Fi 及藍牙連手機</p><p class="use">手機遙控、推送通知、上雲</p></div>
+      <div class="mcard"><div class="top"><span class="mod">B1–B3</span><span class="name">擴展子板</span></div><p class="spec">把 I2C、UART、SPK、MIC、USB、ETH 等介面引出為排針</p><p class="use">用杜邦線把子板拉到模型位置</p></div>
+    </div>
+  </div>
+
+  <div class="mod-group">
+    <h4>感測子板（輸入）</h4>
+    <div class="mod-grid">
+      <div class="mcard"><div class="top"><span class="mod">S1</span><span class="name">按鍵 ×12</span></div><p class="spec">獨立或組合按鍵，支援短按、長按；I2C</p><p class="use">求助鍵、模式切換、示範重置</p></div>
+      <div class="mcard"><div class="top"><span class="mod">S2</span><span class="name">光照</span></div><p class="spec">BH1750，1–65,535 lx，解像度 0.5 lx；上層不可再疊板</p><p class="use">自動路燈、窗簾、溫室遮光</p></div>
+      <div class="mcard"><div class="top"><span class="mod">S3</span><span class="name">麥克風陣列</span></div><p class="spec">1 個 MEMS 咪 + 4 個數字咪，可切換環陣／線陣</p><p class="use">語音指令（配 E4）、噪音分貝</p></div>
+      <div class="mcard detach"><div class="top"><span class="mod">S4</span><span class="name">攝像頭</span></div><p class="spec">800 萬像素、87.6° 視角，可取出調角度</p><p class="use">配 U2P 做物件、人體、車輛辨識</p></div>
+      <div class="mcard"><div class="top"><span class="mod">S5</span><span class="name">NFC 讀寫器</span></div><p class="spec">板載天線，近距離讀寫 NFC 卡</p><p class="use">拍卡登記、門禁、積分</p></div>
+      <div class="mcard detach"><div class="top"><span class="mod">S6</span><span class="name">超聲波</span></div><p class="spec">平面模式 25–600 cm；人體模式 30–200 cm；可取出</p><p class="use">距離、車龍長度、水位</p></div>
+      <div class="mcard detach"><div class="top"><span class="mod">S7</span><span class="name">人體紅外</span></div><p class="spec">熱釋電感測，有人時亮綠燈；可取出</p><p class="use">有人／無人偵測、非接觸開關</p></div>
+      <div class="mcard detach"><div class="top"><span class="mod">S8</span><span class="name">溫濕度</span></div><p class="spec">SHT35，−40–125 ℃、0–100 %RH；探頭可取出</p><p class="use">熱壓力、溫室、管廊監測</p></div>
+    </div>
+  </div>
+
+  <div class="mod-group">
+    <h4>執行及顯示子板（輸出）</h4>
+    <div class="mod-grid">
+      <div class="mcard"><div class="top"><span class="mod">E1</span><span class="name">RGB LED + 4 位數碼管</span></div><p class="spec">I2C 控制</p><p class="use">交通燈、倒數、積分顯示</p></div>
+      <div class="mcard"><div class="top"><span class="mod">E2</span><span class="name">風扇</span></div><p class="spec">直流風扇，可調速並回報轉速</p><p class="use">通風、降溫</p></div>
+      <div class="mcard"><div class="top"><span class="mod">E3</span><span class="name">窗簾機</span></div><p class="spec">步進電機，可控方向及開度</p><p class="use">窗簾、遮光簾、閘門</p></div>
+      <div class="mcard"><div class="top"><span class="mod">E4</span><span class="name">揚聲器</span></div><p class="spec">NS4160 功放</p><p class="use">語音提示、警報</p></div>
+      <div class="mcard"><div class="top"><span class="mod">E5</span><span class="name">8 吋觸控屏</span></div><p class="spec">電容式多點觸控，1280 × 800</p><p class="use">儀表板、控制面板</p></div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <span class="tag a">只限主題 1 · 6 隊</span>
+      <h3>人車家生態微景</h3>
+      <dl class="facts">
+        <dt>尺寸</dt><dd class="mono">59 × 59 × 11 cm 微縮沙盤</dd>
+        <dt>人域</dt><dd>智能手機、穿戴設備</dd>
+        <dt>車域</dt><dd>智能車模：車燈、車門、氛圍燈</dd>
+        <dt>家域</dt><dd>微縮電視、智能音箱、燈光、溫濕度及人體感測器、電動窗簾、IoT 網關</dd>
+        <dt>連接</dt><dd>米家公有雲；MQTT、藍牙、Wi-Fi、UWB、NFC；預留擴展介面</dd>
+      </dl>
+      <p class="small muted">沙盤已佔 1 m 限制大半，周邊仍有空間加自製模型。</p>
+    </div>
+    <div class="callout">
+      <h4>設計含意</h4>
+      <ul>
+        <li>兩塊主控分工：<span class="mod u">U1P</span> 做即時控制，<span class="mod u">U2P</span> 做 AI；端側推理即影像不必上雲，可作私隱賣點</li>
+        <li>可取出的 <span class="mod">S4</span> <span class="mod">S6</span> <span class="mod">S7</span> <span class="mod">S8</span> 裝在模型實際位置；其餘子板留在 M1 上，經擴展板拉線</li>
+        <li><span class="mod">E5</span> 觸控屏適合放在模型前方，扮演「住戶 App」或「城市運行中心」</li>
+        <li>編程環境、每隊獲發子板清單仍未公布，以工作坊一為準</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ IDEAS ============ -->
+<section class="sec a" id="ideas">
+  <div class="sec-head">
+    <span class="k">A · 痛點及方案</span>
+    <h2>北區痛點分析及 12 個創作方案</h2>
+    <p class="sub">每個主題先列有數據或報道支持的北區／北都痛點（代號 L、G、I），再提出 4 個方案。每個方案標示對應痛點、小米模組及運作方式；表格可直接用作工作坊後的開發清單。</p>
+  </div>
+
+  <div class="callout">
+    <h4>每個方案都已對齊的比賽要求</h4>
+    <ul class="req">
+      <li>以小米 AIoT 設備做感測、控制及顯示</li>
+      <li>實體模型或互動展示裝置，≤ 1 m × 1 m × 1.5 m</li>
+      <li>以北都指定地區為場景，對應宜居／宜業／宜遊</li>
+      <li>4 個可重複示範的互動，足夠拍 5 分鐘影片</li>
+      <li>設計概念、應用技術、北都關聯可在 100 字內說清楚</li>
+    </ul>
+  </div>
+
+  <!-- ===== Theme 1 ===== -->
+  <div class="theme" id="theme-1">
+    <div class="theme-head"><span class="tn">主題 1</span><h3>智在人生</h3><span class="small muted">日常生活、智慧家居、輔助科技</span></div>
+    <div class="pp-grid">
+      <div class="pp">
+        <div class="row"><span class="code">L1</span><span class="stat">17.9%</span></div>
+        <h4>人口老化</h4>
+        <p>北區 65 歲或以上人口佔比（按 2021 年人口普查數字計算）；2011 年為 10.7%，2016 年為 15.6%。</p>
+        <p class="src"><a href="https://www.citypopulation.de/en/china/hongkong/admin/N__north" target="_blank" rel="noopener">2021 人口普查</a> · <a href="https://www.ioa.cuhk.edu.hk/images/new/research_projects/afc/pdf/p6_Final_Assessment_Report-North.pdf" target="_blank" rel="noopener">中大北區評估報告</a></p>
+      </div>
+      <div class="pp">
+        <div class="row"><span class="code">L2</span><span class="stat">3.45<small>/6</small></span></div>
+        <h4>醫療及社區支援最弱</h4>
+        <p>長者友善評估中北區得分最低的範疇；區內缺專科門診，長者要往大埔、沙田覆診，輪候時間長。新界北醫院聯網仍在爭取加快規劃。</p>
+        <p class="src"><a href="https://www.ioa.cuhk.edu.hk/images/new/research_projects/afc/pdf/p6_Final_Assessment_Report-North.pdf" target="_blank" rel="noopener">中大北區評估報告</a> · <a href="https://www.legco.gov.hk/yr2026/chinese/counmtg/motion/m_papers/cm20260624cb1-637-1-c.pdf" target="_blank" rel="noopener">立法會議案</a></p>
+      </div>
+      <div class="pp">
+        <div class="row"><span class="code">L3</span><span class="stat">資訊</span></div>
+        <h4>長者資訊鴻溝</h4>
+        <p>長者反映海報字細、資訊過多；不熟手機的隱蔽長者難以收到社區活動及服務資訊。</p>
+        <p class="src"><a href="https://www.ioa.cuhk.edu.hk/images/new/research_projects/afc/pdf/p6_Final_Assessment_Report-North.pdf" target="_blank" rel="noopener">中大北區評估報告</a></p>
+      </div>
+      <div class="pp">
+        <div class="row"><span class="code">L4</span><span class="stat">5.5 萬</span></div>
+        <h4>新區人先到、配套後到</h4>
+        <p>粉嶺北及古洞北第一期至 2027 年約遷入人數，2030–32 年再約 17 萬；古洞北首批公屋逾 1.5 萬個單位。</p>
+        <p class="src"><a href="https://www.stheadline.com/society/3537533/" target="_blank" rel="noopener">星島 2026-01</a> · <a href="https://www.stheadline.com/society/3512878/" target="_blank" rel="noopener">星島 2025-10</a></p>
+      </div>
+    </div>
+
+    <div class="props">
+      <article class="prop pick">
+        <div class="prop-top"><span class="pid">1-A</span><span class="tag c">首選</span><span class="tag g">宜居</span><span class="pts">L1 · L2</span></div>
+        <h4>銀齡安居：長者智能家</h4>
+        <p class="where">古洞北／粉嶺北新公屋長者單位</p>
+        <p>不需用手機的長者家居：偵測跌倒及異常靜止、聽懂粵語指令、拍卡提醒服藥、高溫自動降溫，有事即通知家人及社工。</p>
+        <div class="tbl"><table class="pio"><thead><tr><th>互動</th><th>小米模組</th><th>運作</th></tr></thead><tbody>
+          <tr><td>跌倒／異常靜止</td><td><span class="mod">S4</span><span class="mod u">U2P</span><span class="mod">S6</span><span class="mod">S7</span></td><td>姿態辨識或高度驟降 → <span class="mod">E4</span> 粵語詢問；30 秒無回應 → <span class="mod">C3</span> 推送、<span class="mod">E5</span> 紅色警示</td></tr>
+          <tr><td>拍卡服藥</td><td><span class="mod">S5</span></td><td>對照時間表；<span class="mod">E1</span> 顯示今日次數，漏服 <span class="mod">E4</span> 提醒</td></tr>
+          <tr><td>夜間照明</td><td><span class="mod">S7</span><span class="mod">S2</span></td><td>有人且光照 &lt; 10 lx → <span class="mod">E1</span> 暖光 30%</td></tr>
+          <tr><td>室內熱壓力</td><td><span class="mod">S8</span></td><td>體感溫度分級 → <span class="mod">E2</span> 調速、<span class="mod">E3</span> 遮陽</td></tr>
+        </tbody></table></div>
+        <p class="foot"><b>模型</b> 1:15 單位剖面 80 × 60 × 45 cm　<b>亮點</b> 端側 AI，影像不出屋；可延續 SilverPal Bot 長者照顧研究　<b>難度</b> <span class="dots">●●○</span></p>
+      </article>
+
+      <article class="prop">
+        <div class="prop-top"><span class="pid">1-B</span><span class="tag g">宜居</span><span class="pts">L2 · L1</span></div>
+        <h4>家居復康教練</h4>
+        <p class="where">上水／粉嶺北住宅，連社區健康站</p>
+        <p>專科門診遠、覆診等候長，長者出院後在家做復康：AI 數動作、即時語音糾正，練習紀錄自動交給物理治療師。</p>
+        <div class="tbl"><table class="pio"><thead><tr><th>互動</th><th>小米模組</th><th>運作</th></tr></thead><tbody>
+          <tr><td>動作計數</td><td><span class="mod">S4</span><span class="mod u">U2P</span></td><td>辨識坐立、抬腿；<span class="mod">E5</span> 顯示次數及正確度</td></tr>
+          <tr><td>語音教練</td><td><span class="mod">E4</span></td><td>姿勢不正確即提示，例如「膝頭唔好過腳尖」</td></tr>
+          <tr><td>平衡測試</td><td><span class="mod">S6</span></td><td>量度起身速度及前伸距離 → <span class="mod">E5</span> 進度圖</td></tr>
+          <tr><td>拍卡記錄</td><td><span class="mod">S5</span><span class="mod">C3</span></td><td>拍卡開始練習，數據上傳給治療師</td></tr>
+        </tbody></table></div>
+        <p class="foot"><b>模型</b> 1:10 客廳及社區健康站 70 × 60 × 40 cm，示範時由同學在鏡頭前做動作　<b>亮點</b> 回應北區最弱範疇；可用數學計算關節角度及進度　<b>難度</b> <span class="dots">●●●</span></p>
+      </article>
+
+      <article class="prop">
+        <div class="prop-top"><span class="pid">1-C</span><span class="tag g">宜居</span><span class="pts">L3 · L4</span></div>
+        <h4>新居民智能管家站</h4>
+        <p class="where">古洞北新屋邨大堂</p>
+        <p>入伙首年配套未齊，大堂設一部大字體、會講粵語的管家站：查巴士及診所、拍卡報到社區活動、預約維修，照顧不熟手機的長者。</p>
+        <div class="tbl"><table class="pio"><thead><tr><th>互動</th><th>小米模組</th><th>運作</th></tr></thead><tbody>
+          <tr><td>有人走近</td><td><span class="mod">S7</span></td><td>喚醒 <span class="mod">E5</span> 大字體介面，<span class="mod">E4</span> 問候</td></tr>
+          <tr><td>語音查詢</td><td><span class="mod">S3</span><span class="mod u">U2P</span><span class="mod">C3</span></td><td>辨識「下班車幾點」「診所喺邊」，讀出答案</td></tr>
+          <tr><td>拍卡報到</td><td><span class="mod">S5</span></td><td>活動報到或維修預約；<span class="mod">E1</span> 顯示輪候號碼</td></tr>
+          <tr><td>大堂照明</td><td><span class="mod">S2</span><span class="mod">S7</span></td><td>按光照及人流調節 <span class="mod">E1</span></td></tr>
+        </tbody></table></div>
+        <p class="foot"><b>模型</b> 1:20 屋邨大堂及平台 80 × 60 × 50 cm，<span class="mod">E5</span> 作管家站屏幕　<b>亮點</b> 直接回應長者資訊鴻溝；技術門檻最低，適合初中隊伍　<b>難度</b> <span class="dots">●○○</span></p>
+      </article>
+
+      <article class="prop">
+        <div class="prop-top"><span class="pid">1-D</span><span class="tag a">人車家生態微景</span><span class="tag g">宜居 · 宜業</span><span class="pts">L4 · I1</span></div>
+        <h4>人·車·家一鍵通勤</h4>
+        <p class="where">古洞北住宅 → 新田科技城上班</p>
+        <p>以微景示範北都上班族一天：起床家居自動準備、出門家居自動節能、車輛按天氣預備並建議避開擠塞時段出發，回家自動恢復舒適設定。</p>
+        <div class="tbl"><table class="pio"><thead><tr><th>互動</th><th>微景組件</th><th>運作</th></tr></thead><tbody>
+          <tr><td>起床場景</td><td>手機、穿戴設備、燈光、窗簾</td><td>鬧鐘後窗簾漸開、燈光調亮、音箱報天氣及路況</td></tr>
+          <tr><td>出門節能</td><td>人體感測器、燈光、電視</td><td>確認無人 → 熄燈、關電視、閂窗簾</td></tr>
+          <tr><td>車輛預備</td><td>車燈、車門、氛圍燈</td><td>主人接近 → 亮燈開門；按溫度建議預冷</td></tr>
+          <tr><td>回家場景</td><td>網關、溫濕度感測器</td><td>車到家附近 → 家居預先開燈調溫</td></tr>
+        </tbody></table></div>
+        <p class="foot"><b>模型</b> 微景沙盤 59 × 59 cm，周邊自製古洞北至新田路段，全件 ≤ 1 m　<b>亮點</b> 唯一用盡「人·車·家」三域的方案；只有 6 隊名額，未獲分配即改做 1-A　<b>難度</b> <span class="dots">●●○</span></p>
+      </article>
+    </div>
+  </div>
+
+  <!-- ===== Theme 2 ===== -->
+  <div class="theme" id="theme-2">
+    <div class="theme-head"><span class="tn">主題 2</span><h3>綠智社區</h3><span class="small muted">資源管理、環境監測、社區互動、低碳生活</span></div>
+    <div class="pp-grid">
+      <div class="pp">
+        <div class="row"><span class="code">G1</span><span class="stat">鄉郊</span></div>
+        <h4>鄉郊回收落後</h4>
+        <p>村落分散，回收配套明顯落後市區；打鼓嶺鄰近新界東北堆填區，有垃圾堆積問題。</p>
+        <p class="src"><a href="https://www.legco.gov.hk/yr2024/chinese/panels/ea/papers/eafseh20240527cb1-663-1-c.pdf" target="_blank" rel="noopener">立法會意見書 2024</a></p>
+      </div>
+      <div class="pp">
+        <div class="row"><span class="code">G2</span><span class="stat">&gt;300 mm</span></div>
+        <h4>暴雨水浸</h4>
+        <p>2026 年 6 月渠務署預計坪輋、打鼓嶺、石湖圍低窪區水浸深度或超 300 mm（潮漲加暴雨）；5 月紅雨時沙頭角、上水、打鼓嶺均水浸。</p>
+        <p class="src"><a href="https://www.hk01.com/突發/60361660/" target="_blank" rel="noopener">HK01 2026-06-18</a> · <a href="https://www.stheadline.com/local-topics/3574835/" target="_blank" rel="noopener">星島 2026-05-21</a></p>
+      </div>
+      <div class="pp">
+        <div class="row"><span class="code">G3</span><span class="stat">37.2 °C</span></div>
+        <h4>極端高溫</h4>
+        <p>熱浪期間上水 37.2 °C、打鼓嶺 37.1 °C、元朗 37.5 °C；學者及勞工團體倡議分區熱壓力指引，保障戶外工友。</p>
+        <p class="src"><a href="https://scmp.com/news/hong-kong/society/article/3363732/extreme-heat-grips-hong-kong-labour-groups-urge-district-level-index" target="_blank" rel="noopener">SCMP</a></p>
+      </div>
+      <div class="pp">
+        <div class="row"><span class="code">G4</span><span class="stat">≈ 900 隻</span></div>
+        <h4>發展與生態衝突</h4>
+        <p>野豬數目由 2022 年約 1,830 隻減至 2024 年約 900 隻；動物團體指北都開發侵蝕棲息地，人與動物衝突增加。三寶樹濕地保育公園逾 300 公頃正興建。</p>
+        <p class="src"><a href="https://www.scmp.com/news/hong-kong/society/article/3347080/call-review-over-how-hong-kong-manages-wild-boars-and-buffaloes" target="_blank" rel="noopener">SCMP 2026-03</a> · <a href="https://www.legco.gov.hk/yr2026/chinese/policy-pulse/pp2026-11-northern-metropolis-accelerating-development-c.pdf" target="_blank" rel="noopener">立法會資料</a></p>
+      </div>
+    </div>
+
+    <div class="props">
+      <article class="prop">
+        <div class="prop-top"><span class="pid">2-A</span><span class="tag g">宜居</span><span class="pts">G1 · G4</span></div>
+        <h4>鄉郊智能回收亭</h4>
+        <p class="where">打鼓嶺／坪輋村落</p>
+        <p>在分散村落設小型回收亭：AI 辨識回收物、拍卡賺綠積分、滿溢自動通知按需收運，並鎖蓋防野豬翻找。</p>
+        <div class="tbl"><table class="pio"><thead><tr><th>互動</th><th>小米模組</th><th>運作</th></tr></thead><tbody>
+          <tr><td>投放辨識</td><td><span class="mod">S4</span><span class="mod u">U2P</span></td><td>辨識膠樽、鋁罐、紙 → <span class="mod">E1</span> 亮正確回收格、<span class="mod">E4</span> 提示</td></tr>
+          <tr><td>拍卡積分</td><td><span class="mod">S5</span></td><td>村民卡累積積分，<span class="mod">E1</span> 數碼管顯示</td></tr>
+          <tr><td>滿溢監測</td><td><span class="mod">S6</span><span class="mod">C2</span></td><td>量度桶內高度 → <span class="mod">E5</span> 只派車收滿的回收亭</td></tr>
+          <tr><td>防野豬</td><td><span class="mod">S7</span><span class="mod">S4</span></td><td>夜間偵測動物 → <span class="mod">E3</span> 鎖蓋</td></tr>
+        </tbody></table></div>
+        <p class="foot"><b>模型</b> 1:10 回收亭加 1:200 村落路網底圖 90 × 70 × 50 cm　<b>亮點</b> 可加入最短收集路線計算　<b>難度</b> <span class="dots">●●●</span></p>
+      </article>
+
+      <article class="prop pick2">
+        <div class="prop-top"><span class="pid">2-B</span><span class="tag b">備選</span><span class="tag g">宜居</span><span class="pts">G2</span></div>
+        <h4>村落水浸哨站</h4>
+        <p class="where">打鼓嶺、坪輋、石湖圍低窪村落</p>
+        <p>村與村之間以 Zigbee 連成預警網：超聲波看河渠水位、麥克風以雨聲估雨勢，水位上升即亮燈、廣播、落閘，並讓村民拍卡報平安。</p>
+        <div class="tbl"><table class="pio"><thead><tr><th>互動</th><th>小米模組</th><th>運作</th></tr></thead><tbody>
+          <tr><td>河渠水位</td><td><span class="mod">S6</span><span class="mod">C2</span></td><td>綠／黃／紅三級 → <span class="mod">E1</span> 村口警示燈</td></tr>
+          <tr><td>雨勢估算</td><td><span class="mod">S3</span></td><td>以雨聲分貝估算雨勢（自行校準），提早預警</td></tr>
+          <tr><td>警報及落閘</td><td><span class="mod">E4</span><span class="mod">E3</span><span class="mod">C3</span></td><td>粵語廣播、防水閘板下降、推送村民手機</td></tr>
+          <tr><td>報平安</td><td><span class="mod">S5</span><span class="mod">S1</span></td><td>拍卡或按鍵報平安；<span class="mod">E5</span> 顯示未回應住戶</td></tr>
+        </tbody></table></div>
+        <p class="foot"><b>模型</b> 1:100 村落及透明亞克力河道 90 × 60 × 40 cm，可加水示範；超聲波不接觸水，借用設備不沾水　<b>亮點</b> 2026 年真實事件支持；雨聲估雨勢有創意　<b>難度</b> <span class="dots">●●○</span></p>
+      </article>
+
+      <article class="prop">
+        <div class="prop-top"><span class="pid">2-C</span><span class="tag g">宜居 · 宜業</span><span class="pts">G3</span></div>
+        <h4>分區熱壓力網及清涼站</h4>
+        <p class="where">上水／元朗南街區</p>
+        <p>同一區不同街道體感溫度可以差很遠。在街區佈置溫濕度節點，算出街道級體感溫度，並在巴士站及工地休息處設智能清涼站。</p>
+        <div class="tbl"><table class="pio"><thead><tr><th>互動</th><th>小米模組</th><th>運作</th></tr></thead><tbody>
+          <tr><td>街道熱力圖</td><td><span class="mod">S8</span><span class="mod">C2</span></td><td>計算體感溫度分級 → <span class="mod">E5</span> 社區熱力圖</td></tr>
+          <tr><td>清涼站</td><td><span class="mod">S7</span><span class="mod">S2</span></td><td>有人等候 → <span class="mod">E2</span> 風扇；日照強 → <span class="mod">E3</span> 遮陽簾</td></tr>
+          <tr><td>工友休息提示</td><td><span class="mod">S5</span></td><td>工作證拍卡計時 → <span class="mod">E4</span>「已工作 60 分鐘，請休息飲水」</td></tr>
+          <tr><td>高溫警示</td><td><span class="mod">E1</span></td><td>按體感溫度顯示顏色級別</td></tr>
+        </tbody></table></div>
+        <p class="foot"><b>模型</b> 1:200 街區加 1:20 清涼站 90 × 90 × 40 cm　<b>亮點</b> 回應分區熱指引倡議；體感溫度公式可作數學內容　<b>風險</b> 如每套只有 1 個 <span class="mod">S8</span>，其餘節點要以數據模擬　<b>難度</b> <span class="dots">●●○</span></p>
+      </article>
+
+      <article class="prop">
+        <div class="prop-top"><span class="pid">2-D</span><span class="tag g">宜居 · 宜遊</span><span class="pts">G4</span></div>
+        <h4>生態走廊智能守望</h4>
+        <p class="where">新田科技城與三寶樹濕地保育公園交界</p>
+        <p>開發區緊貼濕地，野生動物會走上馬路或闖入住宅。系統辨識動物、提示司機減速、打開生態通道，並記錄出沒數據供保育使用。</p>
+        <div class="tbl"><table class="pio"><thead><tr><th>互動</th><th>小米模組</th><th>運作</th></tr></thead><tbody>
+          <tr><td>動物辨識</td><td><span class="mod">S4</span><span class="mod u">U2P</span><span class="mod">S7</span></td><td>辨識野豬、水牛、行人 → <span class="mod">E1</span> 路邊閃燈警示車輛</td></tr>
+          <tr><td>生態通道</td><td><span class="mod">S6</span></td><td>動物接近馬路 → <span class="mod">E3</span> 打開生態通道閘門</td></tr>
+          <tr><td>出沒紀錄</td><td><span class="mod">E5</span></td><td>時間及位置熱圖，供保育參考</td></tr>
+          <tr><td>遊客記錄</td><td><span class="mod">S5</span><span class="mod">E4</span></td><td>遊客中心拍卡記錄觀察，語音導賞</td></tr>
+        </tbody></table></div>
+        <p class="foot"><b>模型</b> 1:200 濕地邊界、馬路、生態天橋 100 × 70 × 40 cm　<b>亮點</b> 發展與保育並重，切合「最具北部都會區前瞻獎」　<b>風險</b> 動物辨識要用模型公仔自拍訓練影像　<b>難度</b> <span class="dots">●●●</span></p>
+      </article>
+    </div>
+  </div>
+
+  <!-- ===== Theme 3 ===== -->
+  <div class="theme" id="theme-3">
+    <div class="theme-head"><span class="tn">主題 3</span><h3>智慧基建</h3><span class="small muted">交通、能源、大型設施；數據分析加自動化控制</span></div>
+    <div class="pp-grid">
+      <div class="pp">
+        <div class="row"><span class="code">I1</span><span class="stat">≈ 4 小時</span></div>
+        <h4>交通樽頸</h4>
+        <p>2025 年 9 月 29 日上水三宗意外令全區交通癱瘓近 4 小時；同年 10 月至少 6 宗早上意外令粉嶺公路部分封閉。粉嶺繞道東段 2026 年 5 月通車，預計省 10 分鐘。</p>
+        <p class="src"><a href="https://www.stheadline.com/society/3512878/" target="_blank" rel="noopener">星島 2025-10</a> · <a href="https://www.stheadline.com/society/3566748/" target="_blank" rel="noopener">星島 2026-05</a></p>
+      </div>
+      <div class="pp">
+        <div class="row"><span class="code">I2</span><span class="stat">2034</span></div>
+        <h4>鐵路未到、人先到</h4>
+        <p>北環綫目標 2034 年或之前開通，古洞站 2027 年先投入服務；古洞及新田初期靠巴士小巴，議員關注東鐵綫運力。</p>
+        <p class="src"><a href="https://www.stheadline.com/society/3537533/" target="_blank" rel="noopener">星島 2026-01</a> · <a href="https://www.legco.gov.hk/yr2026/chinese/policy-pulse/pp2026-11-northern-metropolis-accelerating-development-c.pdf" target="_blank" rel="noopener">立法會資料</a></p>
+      </div>
+      <div class="pp">
+        <div class="row"><span class="code">I3</span><span class="stat">36 倍</span></div>
+        <h4>大型設施耗能</h4>
+        <p>沙嶺數據園預計令香港算力至 2032 年提升 36 倍；新田科技城約 210 公頃創科用地、逾 30 萬職位；議員建議綠電與算力一體化。</p>
+        <p class="src"><a href="https://www.legco.gov.hk/yr2026/chinese/policy-pulse/pp2026-11-northern-metropolis-accelerating-development-c.pdf" target="_blank" rel="noopener">立法會資料 2026-03</a></p>
+      </div>
+      <div class="pp">
+        <div class="row"><span class="code">I4</span><span class="stat">32 項</span></div>
+        <h4>低空經濟起步</h4>
+        <p>截至 2026 年 2 月，32 個沙盒項目在逾 50 條航線測試；政府擬在洪水橋／厦村物流區預留低空經濟用地，並商討跨境低空物流試飛。</p>
+        <p class="src"><a href="https://www.districtcouncils.gov.hk/yl/doc/2024_2027/en/committee_meetings_doc/TPDC/31647/TPDC_paper_no_3c.pdf" target="_blank" rel="noopener">元朗區議會文件 2026-04</a></p>
+      </div>
+    </div>
+
+    <div class="props">
+      <article class="prop pick">
+        <div class="prop-top"><span class="pid">3-A</span><span class="tag c">首選</span><span class="tag g">宜居 · 宜業</span><span class="pts">I1 · I2</span></div>
+        <h4>智慧路口：自適應燈號及事故應變</h4>
+        <p class="where">上水／古洞北主要路口及迴旋處</p>
+        <p>AI 數車、按車龍長度分配綠燈；偵測到事故即時提示改道。以數據證明比固定燈號縮短等候時間。</p>
+        <div class="tbl"><table class="pio"><thead><tr><th>互動</th><th>小米模組</th><th>運作</th></tr></thead><tbody>
+          <tr><td>自適應燈號</td><td><span class="mod">S6</span><span class="mod">S4</span><span class="mod u">U2P</span></td><td>按各方向車龍比例分配綠燈 → <span class="mod">E1</span> 交通燈及倒數</td></tr>
+          <tr><td>事故偵測</td><td><span class="mod">S4</span><span class="mod u">U2P</span></td><td>車輛停留超過設定秒數 → <span class="mod">E5</span> 改道提示、<span class="mod">E4</span> 廣播</td></tr>
+          <tr><td>行人優先</td><td><span class="mod">S7</span><span class="mod">S1</span></td><td>有人等候或按無障礙按鈕 → 行人燈、過路聲響</td></tr>
+          <tr><td>數據比較</td><td><span class="mod">E5</span></td><td>固定燈號與自適應燈號各跑 10 週期，比較平均等候時間</td></tr>
+        </tbody></table></div>
+        <p class="foot"><b>模型</b> 1:50 路口及迴旋處 100 × 80 × 30 cm，手推模型車　<b>亮點</b> 真實事件支持；數據分析加自動控制完全對應主題 3 描述　<b>難度</b> <span class="dots">●●○</span></p>
+      </article>
+
+      <article class="prop">
+        <div class="prop-top"><span class="pid">3-B</span><span class="tag g">宜居 · 宜業</span><span class="pts">I2</span></div>
+        <h4>按需接駁候車站</h4>
+        <p class="where">古洞站接駁古洞北新屋邨</p>
+        <p>北環綫通車前新區居民靠巴士小巴。智能候車站點算排隊人數，按需加開接駁車，並提供清涼及大字體到站資訊。</p>
+        <div class="tbl"><table class="pio"><thead><tr><th>互動</th><th>小米模組</th><th>運作</th></tr></thead><tbody>
+          <tr><td>排隊人數</td><td><span class="mod">S6</span><span class="mod">S4</span><span class="mod u">U2P</span></td><td>超過門檻 → <span class="mod">E5</span> 通知調度加開班次</td></tr>
+          <tr><td>拍卡上車</td><td><span class="mod">S5</span></td><td>統計各時段乘客數 → 需求圖表</td></tr>
+          <tr><td>候車環境</td><td><span class="mod">S8</span><span class="mod">S7</span><span class="mod">S2</span></td><td><span class="mod">E2</span> 風扇、<span class="mod">E1</span> 照明</td></tr>
+          <tr><td>到站資訊</td><td><span class="mod">E5</span><span class="mod">E4</span></td><td>大字體到站時間及語音報站，照顧長者及視障人士</td></tr>
+        </tbody></table></div>
+        <p class="foot"><b>模型</b> 1:20 候車站加 1:200 路線底圖 90 × 60 × 50 cm　<b>亮點</b> 以時段數據預測需求　<b>難度</b> <span class="dots">●●○</span></p>
+      </article>
+
+      <article class="prop">
+        <div class="prop-top"><span class="pid">3-C</span><span class="tag g">宜業</span><span class="pts">I3</span></div>
+        <h4>綠色數據中心能源管家</h4>
+        <p class="where">沙嶺數據園／新田科技城</p>
+        <p>算力需求大增，冷卻最耗電。按機櫃溫度精準調節冷卻，室外夠涼就引入自然風，按太陽能多少安排運算工作。</p>
+        <div class="tbl"><table class="pio"><thead><tr><th>互動</th><th>小米模組</th><th>運作</th></tr></thead><tbody>
+          <tr><td>精準冷卻</td><td><span class="mod">S8</span></td><td>冷熱通道溫差 → <span class="mod">E2</span> 調速</td></tr>
+          <tr><td>自然冷卻</td><td><span class="mod">S8</span><span class="mod">C2</span></td><td>室外節點夠涼 → <span class="mod">E3</span> 開百葉窗</td></tr>
+          <tr><td>按日照排工作</td><td><span class="mod">S2</span></td><td>日照強時加大運算負載，<span class="mod">E1</span> 顯示負載百分比</td></tr>
+          <tr><td>門禁及能效</td><td><span class="mod">S5</span><span class="mod">S7</span><span class="mod">E5</span></td><td>拍卡出入、無人熄燈；計算節省電量趨勢</td></tr>
+        </tbody></table></div>
+        <p class="foot"><b>模型</b> 1:20 機房剖面及屋頂太陽能板 80 × 60 × 60 cm　<b>亮點</b> 能源加大型設施，題材新穎　<b>風險</b> 同 2-C，多個溫濕度節點待確認　<b>難度</b> <span class="dots">●●○</span></p>
+      </article>
+
+      <article class="prop pick2">
+        <div class="prop-top"><span class="pid">3-D</span><span class="tag b">備選</span><span class="tag g">宜業</span><span class="pts">I4</span></div>
+        <h4>低空物流起降站</h4>
+        <p class="where">洪水橋／厦村物流區，鄰近住宅</p>
+        <p>住宅旁的無人機物流起降站：確認停機坪淨空才准降落，監測天氣及噪音保障居民，智能貨櫃讓居民拍卡取件。</p>
+        <div class="tbl"><table class="pio"><thead><tr><th>互動</th><th>小米模組</th><th>運作</th></tr></thead><tbody>
+          <tr><td>停機坪淨空</td><td><span class="mod">S6</span><span class="mod">S4</span><span class="mod u">U2P</span></td><td>有人或雜物 → <span class="mod">E1</span> 坪燈轉紅，禁止降落</td></tr>
+          <tr><td>飛行條件</td><td><span class="mod">S8</span><span class="mod">S3</span></td><td>溫濕度及噪音分貝超標 → 暫停航班</td></tr>
+          <tr><td>拍卡取件</td><td><span class="mod">S5</span></td><td><span class="mod">E3</span> 開貨櫃門，<span class="mod">E4</span> 提示</td></tr>
+          <tr><td>航班面板</td><td><span class="mod">E5</span></td><td>航班狀態及噪音趨勢，向居民公開</td></tr>
+        </tbody></table></div>
+        <p class="foot"><b>模型</b> 1:50 起降站屋頂、貨櫃及周邊住宅 80 × 80 × 60 cm，用無動力無人機模型示範（真機飛行須先問大會）　<b>亮點</b> 對應政府預留用地政策；可發揮校內無人機學會經驗　<b>難度</b> <span class="dots">●●●</span></p>
+      </article>
+    </div>
+  </div>
+
+  <!-- ===== Matrix ===== -->
+  <h3>12 個方案比較</h3>
+  <div class="tbl">
+    <table class="matrix">
+      <thead><tr><th>方案</th><th>地點</th><th>定位</th><th class="nowrap">痛點證據</th><th>創意</th><th class="nowrap">技術含量</th><th class="nowrap">製作難度</th><th>設備</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td><b>1-A</b> 銀齡安居</td><td>古洞北／粉嶺北</td><td>宜居</td><td>●●●</td><td>●●○</td><td>●●●</td><td>●●○</td><td>平台（或微景）</td></tr>
+        <tr><td><b>1-B</b> 家居復康教練</td><td>上水／粉嶺北</td><td>宜居</td><td>●●●</td><td>●●●</td><td>●●●</td><td>●●●</td><td>平台</td></tr>
+        <tr><td><b>1-C</b> 新居民管家站</td><td>古洞北</td><td>宜居</td><td>●●○</td><td>●●○</td><td>●●○</td><td>●○○</td><td>平台</td></tr>
+        <tr><td><b>1-D</b> 人·車·家通勤</td><td>古洞北 → 新田</td><td>宜居 · 宜業</td><td>●●○</td><td>●●○</td><td>●●○</td><td>●●○</td><td>微景（限 6 隊）</td></tr>
+        <tr><td><b>2-A</b> 鄉郊回收亭</td><td>打鼓嶺／坪輋</td><td>宜居</td><td>●●○</td><td>●●○</td><td>●●●</td><td>●●●</td><td>平台</td></tr>
+        <tr class="hl2"><td><b>2-B</b> 村落水浸哨站</td><td>打鼓嶺／坪輋／石湖圍</td><td>宜居</td><td>●●●</td><td>●●●</td><td>●●○</td><td>●●○</td><td>平台</td></tr>
+        <tr><td><b>2-C</b> 熱壓力網</td><td>上水／元朗南</td><td>宜居 · 宜業</td><td>●●●</td><td>●●○</td><td>●●○</td><td>●●○</td><td>平台（多個 S8）</td></tr>
+        <tr><td><b>2-D</b> 生態走廊守望</td><td>新田／三寶樹</td><td>宜居 · 宜遊</td><td>●●○</td><td>●●●</td><td>●●●</td><td>●●●</td><td>平台</td></tr>
+        <tr class="hl"><td><b>3-A</b> 智慧路口</td><td>上水／古洞北</td><td>宜居 · 宜業</td><td>●●●</td><td>●●○</td><td>●●●</td><td>●●○</td><td>平台</td></tr>
+        <tr><td><b>3-B</b> 按需接駁站</td><td>古洞站</td><td>宜居 · 宜業</td><td>●●○</td><td>●●○</td><td>●●○</td><td>●●○</td><td>平台</td></tr>
+        <tr><td><b>3-C</b> 數據中心能源</td><td>沙嶺／新田</td><td>宜業</td><td>●●○</td><td>●●●</td><td>●●○</td><td>●●○</td><td>平台（多個 S8）</td></tr>
+        <tr class="hl2"><td><b>3-D</b> 低空物流站</td><td>洪水橋／厦村</td><td>宜業</td><td>●●○</td><td>●●●</td><td>●●●</td><td>●●●</td><td>平台</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small muted">● 越多越強；「製作難度」● 越多越難。評分屬統籌建議，供學生討論時參考。</p>
+
+  <!-- ===== Recommendation ===== -->
+  <div class="callout a">
+    <h4>建議報名組合</h4>
+    <ul>
+      <li><b>首選：隊 A → 1-A 銀齡安居（主題 1）；隊 B → 3-A 智慧路口（主題 3）。</b>獎項按題目分開頒發，兩隊不同主題就不會爭同一批名額。</li>
+      <li>隊 A 報名時表明想用人車家生態微景；如獲分配，可改做 1-D 或 1-A 的微景版本。</li>
+      <li>隊 B 如有無人機學會成員，改做 <b>3-D 低空物流起降站</b>，題材較新，較有機會爭取「最具北部都會區前瞻獎」。</li>
+      <li>如學生想避開較多學校會選的智慧家居題材，隊 A 可改做 <b>2-B 村落水浸哨站</b>：2026 年有真實事件支持，創意分較易拿。</li>
+    </ul>
+  </div>
+
+  <h3>100 字作品簡介草稿</h3>
+  <p class="small muted">按提交要求寫設計概念、應用技術、北都關聯；英文詞及數字按 1 字計。提交前請學生用自己的話改寫。</p>
+  <div class="stack">
+    <div class="draftbox">
+      <div class="draft-head"><span class="pid">1-A</span><b>銀齡安居：長者智能家</b><span class="small muted" data-count="d1a"></span></div>
+      <div class="copyline draft"><code id="d1a">北區長者比例持續上升。本作品以小米AIoT開發平台打造古洞北公屋長者單位：感測器偵測跌倒及異常靜止，端側AI聽懂粵語指令，拍卡提醒服藥，高溫自動降溫，並即時通知家人及社工，讓長者在北都安心居家安老。</code><button class="btn" data-copy-from="d1a">複製</button></div>
+    </div>
+    <div class="draftbox">
+      <div class="draft-head"><span class="pid">3-A</span><b>智慧路口：自適應燈號及事故應變</b><span class="small muted" data-count="d3a"></span></div>
+      <div class="copyline draft"><code id="d3a">上水曾因三宗意外令全區交通癱瘓近四小時，古洞北入伙將再增車流。本作品以小米AIoT開發平台製作北區智能路口：AI攝像頭及超聲波量度車龍，自動分配綠燈；偵測事故即時發出改道提示；以數據證明等候時間縮短。</code><button class="btn" data-copy-from="d3a">複製</button></div>
+    </div>
+    <div class="draftbox">
+      <div class="draft-head"><span class="pid">2-B</span><b>村落水浸哨站</b><span class="small muted" data-count="d2b"></span></div>
+      <div class="copyline draft"><code id="d2b">暴雨令沙頭角、打鼓嶺低窪村落一再水浸。本作品以小米AIoT開發平台製作村落水浸哨站：超聲波監測河渠水位，麥克風以雨聲估算雨勢，Zigbee連接各村節點；水位上升即亮起警示燈、粵語廣播及落閘，爭取撤離時間。</code><button class="btn" data-copy-from="d2b">複製</button></div>
+    </div>
+    <div class="draftbox">
+      <div class="draft-head"><span class="pid">3-D</span><b>低空物流起降站</b><span class="small muted" data-count="d3d"></span></div>
+      <div class="copyline draft"><code id="d3d">北都正預留土地發展低空經濟。本作品以小米AIoT開發平台製作洪水橋低空物流起降站：超聲波及AI攝像頭確認停機坪淨空，溫濕度及噪音感測評估飛行條件，NFC智能貨櫃讓居民拍卡取件，平衡物流效率與社區安寧。</code><button class="btn" data-copy-from="d3d">複製</button></div>
+    </div>
+  </div>
+
+  <details class="srcs">
+    <summary>痛點資料來源（13 項）</summary>
+    <ul class="small">
+      <li><a href="https://www.citypopulation.de/en/china/hongkong/admin/N__north" target="_blank" rel="noopener">北區人口及年齡（2021 人口普查，citypopulation.de 整理）</a></li>
+      <li><a href="https://www.ioa.cuhk.edu.hk/images/new/research_projects/afc/pdf/p6_Final_Assessment_Report-North.pdf" target="_blank" rel="noopener">中大賽馬會老年學研究所：北區長者友善社區終期評估報告</a></li>
+      <li><a href="https://www.legco.gov.hk/yr2026/chinese/counmtg/motion/m_papers/cm20260624cb1-637-1-c.pdf" target="_blank" rel="noopener">立法會議案：加快規劃新界北醫院聯網</a></li>
+      <li><a href="https://www.stheadline.com/society/3537533/" target="_blank" rel="noopener">星島：北環綫分階段開通、古洞站 2027 年投入服務（2026-01）</a></li>
+      <li><a href="https://www.stheadline.com/society/3512878/" target="_blank" rel="noopener">星島：上水交通癱瘓與古洞北入伙（2025-10）</a></li>
+      <li><a href="https://www.stheadline.com/society/3566748/" target="_blank" rel="noopener">星島：粉嶺繞道東段通車（2026-05）</a></li>
+      <li><a href="https://www.legco.gov.hk/yr2024/chinese/panels/ea/papers/eafseh20240527cb1-663-1-c.pdf" target="_blank" rel="noopener">立法會意見書：鄉郊回收配套（2024）</a></li>
+      <li><a href="https://www.hk01.com/突發/60361660/" target="_blank" rel="noopener">HK01：渠務署料新界北低窪區水浸或超 300 mm（2026-06-18）</a></li>
+      <li><a href="https://www.stheadline.com/local-topics/3574835/" target="_blank" rel="noopener">星島：新界北紅雨水浸（2026-05-21）</a></li>
+      <li><a href="https://scmp.com/news/hong-kong/society/article/3363732/extreme-heat-grips-hong-kong-labour-groups-urge-district-level-index" target="_blank" rel="noopener">SCMP：熱浪及分區熱壓力指引倡議</a></li>
+      <li><a href="https://www.scmp.com/news/hong-kong/society/article/3347080/call-review-over-how-hong-kong-manages-wild-boars-and-buffaloes" target="_blank" rel="noopener">SCMP：野豬及水牛管理（2026-03）</a></li>
+      <li><a href="https://www.legco.gov.hk/yr2026/chinese/policy-pulse/pp2026-11-northern-metropolis-accelerating-development-c.pdf" target="_blank" rel="noopener">立法會資料研究：北部都會區加快發展（2026-03）</a></li>
+      <li><a href="https://www.districtcouncils.gov.hk/yl/doc/2024_2027/en/committee_meetings_doc/TPDC/31647/TPDC_paper_no_3c.pdf" target="_blank" rel="noopener">元朗區議會文件：低空經濟發展（2026-04）</a></li>
+    </ul>
+  </details>
+</section>
+
+<!-- ============ BUILD ============ -->
+<section class="sec a" id="build">
+  <div class="sec-head">
+    <span class="k">A · 製作流程</span>
+    <h2>由小米套件到成品</h2>
+    <p class="sub">按次序進行；每步完成才進下一步。</p>
+  </div>
+  <ol class="steps">
+    <li><div><b>領取及盤點（工作坊一）</b>開箱拍照、對清單點算、每塊子板貼隊伍標籤；建立借用紀錄，賽後歸還時逐項核對。</div></li>
+    <li><div><b>逐塊測試（12 月首兩週）</b>每塊子板跑官方範例，記錄介面（I2C／UART）及讀數範圍；有壞板即時通知大會。</div></li>
+    <li><div><b>I/O 對照表定稿</b>每個互動寫成「輸入 → 判斷 → 輸出」一行（即上面方案表格），並定下每塊子板在模型的位置。</div></li>
+    <li><div><b>主控分工</b><span class="mod u">U1P</span> 負責燈、風扇、窗簾、按鍵；<span class="mod u">U2P</span> 負責影像、語音、數據；需要多節點用 <span class="mod">C2</span>，需要手機或雲端用 <span class="mod">C3</span>。</div></li>
+    <li><div><b>紙皮草模定位</b>先做 1:1 紙皮草模，試放感測器、量走線長度，確認全件 ≤ 1 m × 1 m × 1.5 m。</div></li>
+    <li><div><b>正式模型</b>5 mm 發泡板或 PVC 板做結構，細部 3D 打印或激光切割；M1 箱藏底座並留維修門，可取出的感測器用支架固定，其餘經擴展板以杜邦線引出。</div></li>
+    <li><div><b>情境腳本及整合</b>每個互動設計成 40 秒內可重複示範；用 <span class="mod">S1</span> 設一個「重置」鍵；寫好示範次序。</div></li>
+    <li><div><b>拍片及字幕</b>≤ 5 分鐘 MP4，中英字幕（剪映／CapCut 自動字幕後人手校對）；預留一星期重拍；2 月 26 日校內完成提交。</div></li>
+    <li><div><b>海報及匯報</b>3 月 13 日帶模型及海報；模型拆成 2 件以內方便運送，自備拖板及後備線材。</div></li>
+    <li><div><b>歸還設備</b>按大會指示歸還，以盤點紀錄核對。</div></li>
+  </ol>
+
+  <div class="grid2">
+    <div class="stack">
+      <h3>5 分鐘影片分鏡</h3>
+      <div class="tbl">
+        <table>
+          <thead><tr><th class="nowrap">時間</th><th>內容</th></tr></thead>
+          <tbody>
+            <tr><td class="mono nowrap">0:00–0:30</td><td>北都背景：選址、要解決的問題（地圖或數據）</td></tr>
+            <tr><td class="mono nowrap">0:30–1:00</td><td>作品全景及一句話概念</td></tr>
+            <tr><td class="mono nowrap">1:00–3:30</td><td>互動示範：每個 30–40 秒，字幕標示「輸入 → 判斷 → 輸出」</td></tr>
+            <tr><td class="mono nowrap">3:30–4:30</td><td>技術說明：系統架構圖、AI 或數據分析結果</td></tr>
+            <tr><td class="mono nowrap">4:30–5:00</td><td>總結對「宜居、宜業、宜遊」的貢獻；隊員介紹</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="stack">
+      <h3>4 人分工</h3>
+      <div class="tbl">
+        <table>
+          <thead><tr><th class="nowrap">角色</th><th>負責</th></tr></thead>
+          <tbody>
+            <tr><td class="nowrap"><b>隊長／研究</b></td><td>北都資料、100 字簡介、海報、匯報講稿</td></tr>
+            <tr><td class="nowrap"><b>硬件及模型</b></td><td>模型結構、感測器安裝、走線、運送</td></tr>
+            <tr><td class="nowrap"><b>控制程式</b></td><td><span class="mod u">U1P</span> 控制邏輯、按鍵、執行器</td></tr>
+            <tr><td class="nowrap"><b>AI 及數據</b></td><td><span class="mod u">U2P</span> 影像及語音、<span class="mod">E5</span> 介面、數據圖表</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small muted">影片拍攝及字幕全隊分擔；2–3 人隊伍合併角色。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ B: TEACHER ============ -->
+<section class="sec b" id="teacher">
+  <div class="sec-head">
+    <span class="k">B · 教師比賽</span>
+    <h2>Sayo AI 創新教學應用大賽 2026</h2>
+    <p class="sub">Vibe coding 教師比賽：用自然語言提示，在 Sayo Academy（Sayo.ai）製作教學工具、互動應用及課堂工作流程。</p>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>比賽資料</h3>
+      <dl class="facts">
+        <dt>主辦</dt><dd>Sayo AI Limited（Sayo Academy）</dd>
+        <dt>支持機構</dt><dd>香港資助小學校長會、香港津貼中學議會、香港運算思維教育創新社群教師協會（ACTiCT）、香港電訊（HKT）、聯合培生教育出版</dd>
+        <dt>對象</dt><dd>全港中小學教師；小學賽道（小一至小六）、<b>中學賽道（中一至中六）</b></dd>
+        <dt>平台</dt><dd>設計、提示工程、原型到最終提交，全程在 Sayo.ai 完成</dd>
+        <dt>獎金</dt><dd>總額 HK$32,000，24 個現金獎名額（中小學合計）</dd>
+        <dt>查詢</dt><dd class="mono">support@sayo.ai</dd>
+      </dl>
+    </div>
+    <div class="card">
+      <h3>獎項（中學賽道，每個類別）</h3>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>名次</th><th>獎金</th></tr></thead>
+          <tbody>
+            <tr><td>冠軍</td><td class="mono">HK$2,000</td></tr>
+            <tr><td>亞軍</td><td class="mono">HK$1,000</td></tr>
+            <tr><td>季軍</td><td class="mono">HK$1,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><span class="tag b">CPD</span>　成功提交合資格作品：<b>3 小時</b> CPD 證書；每場簡介會另有 1 小時 CPD 證書。</p>
+    </div>
+  </div>
+
+  <h3>四大類別</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th class="nowrap">類別</th><th>科目</th><th>官方示例</th></tr></thead>
+      <tbody>
+        <tr><td class="nowrap"><b>語文</b></td><td>英文、中文、普通話、外語</td><td>互動文法機械人、閱讀理解生成器、口語練習工具</td></tr>
+        <tr><td class="nowrap"><b>人文藝術</b></td><td>歷史、視覺藝術、音樂、社會科學</td><td>虛擬時間軸、互動藝術欣賞測驗、樂理導師</td></tr>
+        <tr><td class="nowrap"><b>數理科學</b></td><td>數學、物理、化學、生物、STEAM</td><td>逐步解題助手、科學實驗視覺化、公式計算器</td></tr>
+        <tr><td class="nowrap"><b>行政與營運</b></td><td>課堂管理、行政自動化</td><td>功課追蹤器、座位表生成器、教案規劃、獎勵積分儀表板</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid2">
+    <div class="stack">
+      <h3>作品繳交要求</h3>
+      <ol class="steps b">
+        <li><div><b>註冊</b>以學校電郵經 Google SSO 或 Microsoft SSO 登入 Sayo.ai。</div></li>
+        <li><div><b>設計及製作</b>在瀏覽器內用 Sayo 內建 AI 工具 vibe-code 作品。</div></li>
+        <li><div><b>網上提交</b>在 Sayo.ai 提交「Sayo 應用連結」。可跨類別，每類別限 1 項；同一類別多次提交只計首次。</div></li>
+        <li><div><b>準時</b>2026 年 11 月 30 日（一）晚上 11:59（香港時間）前完成。</div></li>
+      </ol>
+      <p class="small muted">官方比賽指南 PDF 為圖片版，未能抽取文字；如指南列出額外內容（例如作品說明、截圖），以指南為準。</p>
+    </div>
+    <div class="stack">
+      <h3>大會時間表</h3>
+      <div class="tbl">
+        <table>
+          <tbody>
+            <tr><td class="mono nowrap">2026/8/17–11/30</td><td>註冊與創作</td></tr>
+            <tr><td class="mono nowrap">2026/11/30</td><td><b>作品提交截止</b></td></tr>
+            <tr><td class="mono nowrap">2026 年 12 月</td><td>評審：應用功能、提示工作流程、教育影響</td></tr>
+            <tr><td class="mono nowrap">2027 年 1 月</td><td>公布得獎名單及頒獎典禮</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>教師線上簡介會（Google Meet，16:00–17:00）</h3>
+      <div class="tbl">
+        <table>
+          <tbody>
+            <tr><td class="mono nowrap">11/10（二）</td><td>今日；比賽安排、參賽方法、vibe coding 示範</td></tr>
+            <tr><td class="mono nowrap">11/18（三）</td><td>同上</td></tr>
+            <tr><td class="mono nowrap">11/27（五）</td><td>另示範 10 款學校行政工具（代課、缺席統計、教育局文件搜尋器等）</td></tr>
+            <tr><td class="mono nowrap">12/2（三）</td><td>同 11/27；已過截止日，只適合作 CPD 或校內推廣</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout b">
+    <h4>注意事項</h4>
+    <ol>
+      <li><b>同一類別只計首次提交。</b>草稿或測試版不要按提交，定稿後一次過交。</li>
+      <li>評審包括「提示工作流程」：由構思開始就在 Sayo 內迭代並保留提示紀錄；在外面寫好再搬入，未必能展示這部分。</li>
+      <li>用學校電郵登入；提交後用另一瀏覽器的無痕視窗測試應用連結可否開啟。</li>
+      <li>作品內不要放真實學生姓名、成績等個人資料，用示範數據。</li>
+      <li>11/30 截止當日下午有城大工作坊一（平日班）：學生建議報 11/29 周日場，Sayo 於 11/28 提交。</li>
+      <li>官方未公布三項評審準則的比重，準備時三項平均用力。</li>
+    </ol>
+  </div>
+
+  <h3>評審準則及準備</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th class="nowrap">準則</th><th>準備重點</th></tr></thead>
+      <tbody>
+        <tr><td class="nowrap"><b>應用功能</b></td><td>完整可用；手機及電腦都順暢；有清楚指示及錯誤提示</td></tr>
+        <tr><td class="nowrap"><b>提示工作流程</b></td><td>結構化提示（角色、任務、限制、輸出格式）；v1 → v2 → v3 迭代有紀錄，每版改了甚麼一目了然</td></tr>
+        <tr><td class="nowrap"><b>教育影響</b></td><td>對應課程重點或真實痛點；附課堂試用證據：學生人數、回饋、完成率</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>參賽構思（中學賽道）</h3>
+  <div class="grid2">
+    <div class="card">
+      <span class="tag b">數理科學</span>
+      <h3>DSE 卷二 MC 陷阱診斷室</h3>
+      <p>學生做 MC，系統按所選的干擾項判斷背後誤解（例如正負號、定義域、單位），給分步提示而非直接給答案；教師端顯示全班最常見誤解。</p>
+      <p class="small muted">可沿用現有卷二 MC 解說教室的題型分類，在 Sayo 內重建；先在一班高中試用一節，收集完成率及回饋。</p>
+    </div>
+    <div class="card">
+      <span class="tag b">行政與營運</span>
+      <h3>比賽統籌助手</h3>
+      <p>教師貼上比賽章程，AI 抽取日期、要求及繳交清單，自動生成時間線、學生招募通告及家長通知稿，並追蹤各隊進度。</p>
+      <p class="small muted">來自今次統籌兩個比賽的真實需要，亦避開簡介會已示範的代課、缺席統計等常見題目。</p>
+    </div>
+  </div>
+
+  <h3>校內推廣</h3>
+  <div class="tbl">
+    <table>
+      <tbody>
+        <tr><td class="mono nowrap">11/11</td><td>轉發比賽頁及簡介會報名表給語文、人文藝術、數理、行政各組</td></tr>
+        <tr><td class="mono nowrap">11/18 前</td><td>每個類別邀請 1 位同事，LPS 最多可有 4 項作品</td></tr>
+        <tr><td class="mono nowrap">11/24 前後</td><td>午膳 30 分鐘 vibe coding 互助時段</td></tr>
+        <tr><td class="mono nowrap">11/28</td><td>校內檢查：連結可開、無學生個人資料 → 各自一次過提交</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ LINKS ============ -->
+<section class="sec" id="links">
+  <div class="sec-head">
+    <span class="k">LINKS</span>
+    <h2>報名及繳交連結總表</h2>
+  </div>
+  <div class="grid2">
+    <div class="stack">
+      <span class="tag a">A · 學生比賽</span>
+      <div class="links">
+        <a class="link key" href="https://docs.google.com/forms/d/e/1FAIpQLSdPujojp8c0FD4tCDd4vWZXnSRa5nbDKkJguN37jE4mttb5aw/viewform" target="_blank" rel="noopener"><b>中學組報名表（13/11 18:00 截止）</b><span>docs.google.com/forms</span><i>報名</i></a>
+        <a class="link key" href="https://www.cityu.edu.hk/skltmw/AIot_Comp/submission.html" target="_blank" rel="noopener"><b>作品提交及匯報（2027/1/5–3/5）</b><span>cityu.edu.hk/skltmw/AIot_Comp/submission</span><i>繳交</i></a>
+        <a class="link" href="https://www.cityu.edu.hk/skltmw/AIot_Comp/index.html" target="_blank" rel="noopener"><b>比賽網站</b><span>cityu.edu.hk/skltmw/AIot_Comp</span><i>網站</i></a>
+        <a class="link" href="https://drive.google.com/file/d/1gGS2cTC8u5Y1AFvBykUWNtGJF1C9KR1s/view" target="_blank" rel="noopener"><b>比賽章程（30 Oct 2026 版）</b><span>Google Drive PDF</span><i>PDF</i></a>
+        <a class="link" href="https://drive.google.com/file/d/1sOZYXv2gBs5bZzsqiPTveKngMzIQpX7n/view" target="_blank" rel="noopener"><b>比賽海報</b><span>Google Drive</span><i>PDF</i></a>
+        <a class="link" href="https://www.cityu.edu.hk/skltmw/AIot_Comp/xiaomi_dev.html" target="_blank" rel="noopener"><b>比賽設備頁</b><span>cityu.edu.hk/skltmw/AIot_Comp/xiaomi_dev</span><i>網站</i></a>
+        <a class="link" href="https://drive.google.com/file/d/1a-sk3ltzh6oenH0317UwhVl1xDrIwlQr/view" target="_blank" rel="noopener"><b>小米 AIoT 開發平台介紹</b><span>Google Drive PDF</span><i>PDF</i></a>
+        <a class="link" href="https://drive.google.com/file/d/1CrsE524W3eAhirMCz2ZapjHGrAoMsY-5/view" target="_blank" rel="noopener"><b>人車家生態微景介紹</b><span>Google Drive</span><i>PDF</i></a>
+        <a class="link" href="https://drive.google.com/file/d/1x5iOpjfmMnY1Hbsp1ovWeEHk942N0kSL/view" target="_blank" rel="noopener"><b>人車家生態微景影片</b><span>Google Drive</span><i>影片</i></a>
+        <a class="link" href="https://drive.google.com/file/d/1649G3RyDM3ZLaT4de1Bh8tWv8T7JRwvf/view" target="_blank" rel="noopener"><b>簡介會錄影（20/10）</b><span>Google Drive</span><i>影片</i></a>
+        <a class="link" href="https://drive.google.com/file/d/1vgHKXg0owfpWCjYohy_kgZR9FEBWos6c/view" target="_blank" rel="noopener"><b>簡介會簡報（20/10）</b><span>Google Drive PDF</span><i>PDF</i></a>
+        <a class="link" href="https://www.cityu.edu.hk/skltmw/AIot_Comp/comp_workshop.html" target="_blank" rel="noopener"><b>工作坊安排</b><span>cityu.edu.hk/skltmw/AIot_Comp/comp_workshop</span><i>網站</i></a>
+      </div>
+      <div class="copyline"><code>vpceaiotcomp@gapps.cityu.edu.hk</code><button class="btn" data-copy="vpceaiotcomp@gapps.cityu.edu.hk">複製提交電郵</button></div>
+      <div class="copyline"><code>3895 3790 · info@hksssc.edu.hk</code><button class="btn" data-copy="3895 3790">複製查詢電話</button></div>
+    </div>
+    <div class="stack">
+      <span class="tag b">B · 教師比賽</span>
+      <div class="links">
+        <a class="link keyb" href="https://sayo.ai/zh-HK/sign-in" target="_blank" rel="noopener"><b>登入 Sayo.ai（創作及提交）</b><span>sayo.ai/zh-HK/sign-in</span><i>繳交</i></a>
+        <a class="link keyb" href="https://docs.google.com/forms/d/e/1FAIpQLSdlGrn8smru6vwP43SokpiSQcyaKG_NnxQoyrqdTEDpfYMU0Q/viewform" target="_blank" rel="noopener"><b>教師線上簡介會報名</b><span>docs.google.com/forms</span><i>報名</i></a>
+        <a class="link" href="https://sayo.ai/zh-HK/vibe-2026" target="_blank" rel="noopener"><b>比賽頁</b><span>sayo.ai/zh-HK/vibe-2026</span><i>網站</i></a>
+        <a class="link" href="https://sayo.ai/vibe-2026/competition-guide.pdf" target="_blank" rel="noopener"><b>比賽指南</b><span>sayo.ai/vibe-2026/competition-guide.pdf</span><i>PDF</i></a>
+        <a class="link" href="https://sayo.ai/zh-HK/hub?type=app&amp;tab=public" target="_blank" rel="noopener"><b>公開作品庫（參考其他老師作品）</b><span>sayo.ai/zh-HK/hub</span><i>網站</i></a>
+      </div>
+      <div class="copyline"><code>support@sayo.ai</code><button class="btn" data-copy="support@sayo.ai">複製查詢電郵</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OPEN QUESTIONS ============ -->
+<section class="sec" id="open-questions">
+  <div class="sec-head">
+    <span class="k">OPEN</span>
+    <h2>待確認事項</h2>
+    <p class="sub">官方資料未有答案，建議在工作坊一或致電查詢。</p>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <span class="tag a">A · 學生比賽</span>
+      <ol>
+        <li>編程環境及語言（圖形化、C、Python？）及需預先安裝的軟件</li>
+        <li>每隊獲發的子板清單及數量，是否包括全部 S1–S8、E1–E5、U1P、U2P；溫濕度子板 S8 有幾多個（影響方案 2-C、3-C）</li>
+        <li>可否加入非小米零件（模型車、額外 LED、電池等）；方案 3-D 可否用無動力無人機模型示範</li>
+        <li>報名表第二頁的內容（設備偏好、工作坊場次？）</li>
+        <li>作品匯報場地、海報尺寸、模型運送及電源安排</li>
+        <li>設備歸還日期及方式</li>
+        <li>頒獎日期：4 月 24 日或 5 月 15 日</li>
+      </ol>
+    </div>
+    <div class="card">
+      <span class="tag b">B · 教師比賽</span>
+      <ol>
+        <li>比賽指南 PDF 有否額外繳交內容（作品說明、示範影片）</li>
+        <li>三項評審準則的比重</li>
+        <li>CPD 證書發放方式及時間</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>資料來源：城大比賽網站及《比賽詳情》章程（30 Oct 2026 版）、比賽簡介會簡報（20 Oct 2026，19 頁已逐頁核對）、小米設備介紹 PDF；Sayo 比賽頁及教師簡介會報名表。北區痛點資料來源列於「痛點及方案」章節。資料整理於 2026-11-10，一切以主辦單位最新公布為準。</p>
+</footer>
+</main>
+
+<script>
+(function(){
+  // ---------- today in Hong Kong ----------
+  function hkToday(){
+    try{ return new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Hong_Kong'}); }
+    catch(e){ var d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+  }
+  function utc(s){ var p=s.split('-').map(Number); return Date.UTC(p[0],p[1]-1,p[2]); }
+  var today = hkToday();
+
+  // ---------- countdowns ----------
+  document.querySelectorAll('[data-deadline]').forEach(function(el){
+    var diff = Math.round((utc(el.dataset.deadline) - utc(today)) / 86400000);
+    if (diff > 0) el.innerHTML = diff + '<small>日</small>';
+    else if (diff === 0) el.innerHTML = '今日<small>截止</small>';
+    else el.innerHTML = '已截止';
+  });
+
+  // ---------- gantt ----------
+  var G0 = utc('2026-11-09'), G1 = utc('2027-05-01'), SPAN = G1 - G0;
+  function pct(s){ return Math.max(0, Math.min(100, (utc(s) - G0) / SPAN * 100)); }
+  function md(s){ var p=s.split('-'); return (+p[1])+'/'+(+p[2]); }
+  var rows = [
+    {grp:'A　學生比賽'},
+    {t:'招募及報名', d:'11/10–11/13', bars:[['a','2026-11-10','2026-11-13']], ms:[['c','2026-11-13','報名截止']]},
+    {t:'北都研究及構思', d:'11/14–11/28', bars:[['a','2026-11-14','2026-11-28']]},
+    {t:'工作坊一、二（城大）', d:'11/29–12/5', bars:[['a win','2026-11-29','2026-12-05']], ms:[['a','2026-11-29','領設備'],['a','2026-12-05','']]},
+    {t:'盤點及模組測試', d:'11/30–12/18', bars:[['a','2026-11-30','2026-12-18']]},
+    {t:'原型衝刺（聖誕假）', d:'12/19–1/2', bars:[['a','2026-12-19','2027-01-02']]},
+    {t:'實體模型及整合', d:'1/3–2/5', bars:[['a','2027-01-03','2027-02-05']]},
+    {t:'優化、拍片、字幕', d:'2/6–2/26', bars:[['a','2027-02-06','2027-02-26']], ms:[['a','2027-02-26','校內完成']]},
+    {t:'網上提交窗口', d:'1/5–3/5 18:00', bars:[['a win','2027-01-05','2027-03-05']], ms:[['c','2027-03-05','截止']]},
+    {t:'海報、匯報綵排及匯報', d:'3/6–3/13', bars:[['a','2027-03-06','2027-03-12']], ms:[['a','2027-03-13','匯報']]},
+    {t:'頒獎典禮', d:'4/24（或 5/15）', ms:[['a','2027-04-24','頒獎']]},
+    {grp:'B　教師比賽'},
+    {t:'Sayo 構思、製作、試用', d:'11/10–11/27', bars:[['b','2026-11-10','2026-11-27']]},
+    {t:'教師簡介會', d:'11/10 · 11/18 · 11/27 · 12/2', ms:[['b','2026-11-10',''],['b','2026-11-18',''],['b','2026-11-27',''],['b','2026-12-02','']]},
+    {t:'提交作品', d:'校內 11/28 · 截止 11/30', ms:[['b','2026-11-28',''],['c','2026-11-30','截止']]},
+    {t:'評審', d:'12 月', bars:[['b win','2026-12-01','2026-12-31']]},
+    {t:'得獎公布及頒獎', d:'2027 年 1 月', bars:[['b win','2027-01-01','2027-01-31']]},
+    {grp:'校務及假期'},
+    {t:'HKJPSMC（LPS 協辦）', d:'12/12', ms:[['g','2026-12-12','']]},
+    {t:'農曆新年', d:'2027/2/6', ms:[['g','2027-02-06','']]}
+  ];
+  var months = [['2026-11-09','11月'],['2026-12-01','12月'],['2027-01-01','2027·1月'],['2027-02-01','2月'],['2027-03-01','3月'],['2027-04-01','4月']];
+  var h = '<div class="g-head"><div class="g-lbl small muted">項目</div><div class="g-trk">';
+  months.forEach(function(m){ h += '<div class="g-month" style="left:'+pct(m[0])+'%">'+m[1]+'</div>'; });
+  h += '</div></div>';
+  rows.forEach(function(r){
+    if (r.grp){ h += '<div class="g-row grp"><div class="g-lbl">'+r.grp+'</div><div class="g-trk"></div></div>'; return; }
+    h += '<div class="g-row"><div class="g-lbl">'+r.t+'<small>'+r.d+'</small></div><div class="g-trk">';
+    (r.bars||[]).forEach(function(b){
+      var l = pct(b[1]), w = Math.max(pct(b[2]) - l, 0.6);
+      h += '<div class="g-bar '+b[0]+'" style="left:'+l+'%;width:'+w+'%" title="'+md(b[1])+'–'+md(b[2])+'"></div>';
+    });
+    (r.ms||[]).forEach(function(m){
+      var l = pct(m[1]);
+      h += '<div class="g-ms '+m[0]+'" style="left:'+l+'%" title="'+md(m[1])+(m[2]?' '+m[2]:'')+'"></div>';
+      if (m[2]) h += '<div class="g-ms-l" style="left:'+l+'%">'+md(m[1])+' '+m[2]+'</div>';
+    });
+    h += '</div></div>';
+  });
+  h += '<div class="g-grid">';
+  months.slice(1).forEach(function(m){ h += '<div class="ln" style="left:'+pct(m[0])+'%"></div>'; });
+  var t = utc(today);
+  if (t >= G0 && t <= G1) h += '<div class="today" style="left:'+pct(today)+'%"><span>今日 '+md(today)+'</span></div>';
+  h += '</div>';
+  var g = document.getElementById('gantt'); if (g) g.innerHTML = h;
+
+  // ---------- checklist (per-viewer) ----------
+  var KEY = 'lps-comp-checklist-v1', state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e){ state = {}; }
+  document.querySelectorAll('#checklist input[type=checkbox]').forEach(function(cb){
+    if (state[cb.id]) { cb.checked = true; cb.closest('label').classList.add('done'); }
+    cb.addEventListener('change', function(){
+      cb.closest('label').classList.toggle('done', cb.checked);
+      state[cb.id] = cb.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){}
+    });
+  });
+
+  // ---------- copy buttons ----------
+  document.querySelectorAll('[data-count]').forEach(function(el){
+    var src = document.getElementById(el.dataset.count); if (!src) return;
+    var n = src.textContent.replace(/[A-Za-z]+|\d+/g, '字').replace(/\s/g, '').length;
+    el.textContent = '約 ' + n + ' 字' + (n > 100 ? '（超過 100 字）' : '');
+  });
+  document.querySelectorAll('[data-copy],[data-copy-from]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var from = btn.getAttribute('data-copy-from');
+      var txt = from ? (document.getElementById(from) || {}).textContent || '' : btn.getAttribute('data-copy');
+      var label = btn.textContent;
+      function done(ok){ btn.textContent = ok ? '已複製' : '請手動選取'; setTimeout(function(){ btn.textContent = label; }, 1500); }
+      function fallback(){
+        var code = btn.parentElement.querySelector('code');
+        if (code){ var r = document.createRange(); r.selectNodeContents(code); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); }
+        done(false);
+      }
+      try {
+        navigator.clipboard.writeText(txt).then(function(){ done(true); }, fallback);
+      } catch(e){ fallback(); }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
