@@ -14,7 +14,7 @@
 :root{
   --bg:#F2F4F6; --surface:#FFFFFF; --sunk:#E8ECF0; --ink:#16212C; --muted:#56636F;
   --line:#D5DCE3; --line-strong:#B9C3CD;
-  --a:#C2410C; --a-soft:#FCEBDD; --b:#0B7A75; --b-soft:#DDF1EF;
+  --a:#C2410C; --a-soft:#FCEBDD; --b:#0B7A75; --b-soft:#DDF1EF; --h:#3B4CCA; --h-soft:#E4E7FB;
   --crit:#B42318; --crit-soft:#FDE7E4; --gray:#6F7B87; --gray-soft:#E3E8ED;
   --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",system-ui,sans-serif;
   --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
@@ -24,7 +24,7 @@
   :root:not([data-theme="light"]){
     --bg:#0E1318; --surface:#161D24; --sunk:#1D2630; --ink:#E5EBF0; --muted:#97A4B0;
     --line:#29343F; --line-strong:#3A4754;
-    --a:#FF8A4C; --a-soft:#3A2416; --b:#3EC6BE; --b-soft:#123230;
+    --a:#FF8A4C; --a-soft:#3A2416; --b:#3EC6BE; --b-soft:#123230; --h:#9DA9FF; --h-soft:#1E2448;
     --crit:#FF7A6B; --crit-soft:#3B1C19; --gray:#8D99A5; --gray-soft:#24303A;
     color-scheme:dark;
   }
@@ -32,7 +32,7 @@
 :root[data-theme="dark"]{
   --bg:#0E1318; --surface:#161D24; --sunk:#1D2630; --ink:#E5EBF0; --muted:#97A4B0;
   --line:#29343F; --line-strong:#3A4754;
-  --a:#FF8A4C; --a-soft:#3A2416; --b:#3EC6BE; --b-soft:#123230;
+  --a:#FF8A4C; --a-soft:#3A2416; --b:#3EC6BE; --b-soft:#123230; --h:#9DA9FF; --h-soft:#1E2448;
   --crit:#FF7A6B; --crit-soft:#3B1C19; --gray:#8D99A5; --gray-soft:#24303A;
   color-scheme:dark;
 }
@@ -116,7 +116,7 @@ dl.facts dt{color:var(--muted);font-size:13.5px;font-weight:500;padding-top:1px}
 dl.facts dd{margin:0;min-width:0}
 @media (max-width:480px){dl.facts{grid-template-columns:1fr;gap:2px}dl.facts dd{margin-bottom:8px}}
 
-.callout{border:1px solid var(--line-strong);border-radius:var(--r);padding:14px 16px;display:grid;gap:8px;background:var(--sunk)}
+.callout{border:1px solid var(--line-strong);border-radius:var(--r);padding:14px 16px;display:grid;gap:8px;align-content:start;background:var(--sunk)}
 .callout.a{background:var(--a-soft);border-color:var(--a)}
 .callout.b{background:var(--b-soft);border-color:var(--b)}
 .callout h4{font-size:15px}
@@ -193,7 +193,7 @@ ol.steps b{display:block}
 
 /* Gantt */
 .gantt-box{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
-.gantt{--lw:210px;min-width:780px;position:relative;padding-bottom:6px}
+.gantt{--lw:210px;min-width:940px;position:relative;padding-bottom:6px}
 .g-row{display:grid;grid-template-columns:var(--lw) 1fr;min-height:34px;border-bottom:1px solid var(--line)}
 .g-row:last-child{border-bottom:none}
 .g-row.grp{min-height:28px;background:var(--sunk)}
@@ -283,9 +283,29 @@ details.srcs ul{margin-top:8px}
 table.roster td{vertical-align:middle}
 #team{scroll-margin-top:64px}
 
+/* C track: HKSF */
+.count.h .days{color:var(--h)}
+.secnav a.h{color:var(--h)}
+.sec.h .sec-head{border-color:var(--h)} .sec.h .sec-head .k{color:var(--h)}
+.tag.h{background:var(--h-soft);color:var(--h)}
+.g-bar.h{background:var(--h)} .g-ms.h{background:var(--h)}
+.qlink.h .ql-k{color:var(--h)}
+ol.steps.h>li::before{color:var(--h)}
+.link.keyh{border-color:var(--h)} .link.keyh i{color:var(--h)}
+.callout.h{background:var(--h-soft);border-color:var(--h)}
+.callout.crit{background:var(--crit-soft);border-color:var(--crit)}
+.callout.crit h4{color:var(--crit)}
+.pct{display:grid;gap:4px;min-width:5.5em}
+.pct b{font-family:var(--f-mono);font-size:14px}
+.bars.wide .bar-row{grid-template-columns:8.5em 1fr 3em}
+.mini{height:6px;background:var(--sunk);border-radius:3px;overflow:hidden}
+.mini i{display:block;height:100%;background:var(--h);border-radius:3px}
+table.crit-tbl td:nth-child(2){font-size:13px;color:var(--muted);min-width:16em}
+table.crit-tbl td:first-child{font-weight:700;white-space:nowrap}
+
 /* Quick links */
 .quick-wrap{display:grid;gap:8px}
-.quick{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.quick{display:grid;grid-template-columns:repeat(auto-fit,minmax(196px,1fr));gap:10px}
 .qlink{display:grid;gap:2px;align-content:start;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;min-width:0}
 .qlink:hover{border-color:var(--ink)}
 .qlink .ql-k{font-size:12px;font-weight:700;letter-spacing:.04em}
@@ -300,15 +320,20 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
 
 <div class="wrap">
   <header class="hero">
-    <div class="eyebrow">廖寶珊紀念書院 · AI／STEM 統籌 · 資料整理至 2026-11-10</div>
+    <div class="eyebrow">廖寶珊紀念書院 · AI／STEM 統籌 · 最後更新 2026-11-23</div>
     <h1>STEM<span class="slash">／</span>AI 比賽統籌 2026–27</h1>
-    <p class="lead"><b>A 學生組</b>「三十港章 慧智北都」AIoT 模型設計比賽（城大 × 津中議會 × 中文中學聯會，小米設備）及 <b>B 教師組</b> Sayo AI 創新教學應用大賽（Vibe Coding）。比賽資料、北區痛點及 12 個作品方案、製作流程、統籌時間線及所有報名／繳交連結。</p>
+    <p class="lead"><b>A 學生組</b>「三十港章 慧智北都」AIoT 模型設計比賽（城大 × 津中議會 × 中文中學聯會，小米設備）、<b>B 教師組</b> Sayo AI 創新教學應用大賽（Vibe Coding）及 <b>C 學生組</b>香港創科展 2026–2027。比賽資料、北區痛點及 12 個作品方案、製作流程、統籌時間線及所有報名／繳交連結。</p>
     <div class="alert" role="note">
       <div class="dot" aria-hidden="true"></div>
-      <p><strong>工作坊一：11 月 29 日（日）10:00 或 30 日（一）16:30，城大。</strong>比賽設備即場派發；每個工作坊須有<b>不少於一半組員</b>出席，缺席即取消資格。每隊自備最少 1 部手提電腦及充電器。</p>
+      <p><strong>11 月 29 日（日）兩件事：</strong>① <b>香港創科展第一階段報名當晚 23:59 截止</b>，須在網上平台上載所有學生證明文件及同意書，並按「提交報名申請」；未於第一階段報名即不能參賽。② AIoT 比賽工作坊一 10:00（或 30 日 16:30）在城大領設備，須有不少於一半組員出席，缺席即取消資格。</p>
     </div>
     <div class="count-row">
       <div class="count crit">
+        <span class="what">C 創科展第一階段報名截止</span>
+        <span class="days" data-deadline="2026-11-29">6<small>日</small></span>
+        <span class="when">2026-11-29（日）23:59</span>
+      </div>
+      <div class="count a">
         <span class="what">A 工作坊一（領設備）</span>
         <span class="days" data-deadline="2026-11-29">11<small>日</small></span>
         <span class="when">2026-11-29（日）或 11-30（一）</span>
@@ -331,6 +356,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
         <a class="qlink a" href="https://www.cityu.edu.hk/skltmw/AIot_Comp/submission.html" target="_blank" rel="noopener"><span class="ql-k">A 學生 · 繳交</span><b>作品提交及匯報</b><span class="d">2027-01-05 至 03-05 18:00；Drive 文件夾連結電郵 vpceaiotcomp@gapps.cityu.edu.hk</span></a>
         <a class="qlink b" href="https://sayo.ai/zh-HK/sign-in" target="_blank" rel="noopener"><span class="ql-k">B 教師 · 註冊及繳交</span><b>登入 Sayo.ai 創作及提交</b><span class="d">學校電郵登入；截止 2026-11-30（一）23:59</span></a>
         <a class="qlink b" href="https://docs.google.com/forms/d/e/1FAIpQLSdlGrn8smru6vwP43SokpiSQcyaKG_NnxQoyrqdTEDpfYMU0Q/viewform" target="_blank" rel="noopener"><span class="ql-k">B 教師 · 簡介會</span><b>教師線上簡介會報名</b><span class="d">11/27、12/2 16:00；每場 1 小時 CPD</span></a>
+        <a class="qlink h" href="https://hksfr.awardsplatform.com/" target="_blank" rel="noopener"><span class="ql-k">C 創科展 · 報名及繳交</span><b>香港創科展網上平台</b><span class="d">第一階段報名截止 2026-11-29（日）23:59；作品提交截止 2027-02-28（日）23:59</span></a>
       </div>
     </div>
   </header>
@@ -345,6 +371,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
     <a class="a" href="#ideas">痛點及方案</a>
     <a class="a" href="#build">製作流程</a>
     <a class="b" href="#teacher">B 教師比賽</a>
+    <a class="h" href="#hksf">C 創科展</a>
     <a href="#links">連結總表</a>
     <a href="#open-questions">待確認</a>
   </div>
@@ -384,6 +411,18 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
         <dt>獎項</dt><dd>每類別 冠 HK$2,000、亞 HK$1,000、季 HK$1,000；提交合資格作品獲 3 小時 CPD</dd>
       </dl>
     </div>
+    <div class="card">
+      <span class="tag h">C · 學生比賽</span>
+      <h3>香港創科展 2026–2027</h3>
+      <dl class="facts">
+        <dt>主辦</dt><dd>香港創新基金；信和集團首席贊助</dd>
+        <dt>參賽</dt><dd>學校提名；每隊 1–4 名學生 + 1 名全職教職員任指導老師；初中組（中一至中三）／高中組（中四至中六）</dd>
+        <dt>第一階段</dt><dd><b>2026-11-29（日）23:59</b> 前網上報名，上載學生證明文件及同意書</dd>
+        <dt>第二階段</dt><dd><b>2027-02-28（日）23:59</b> 前上載計劃書（範本 PDF ≤ 10 MB）、2–4 張照片、作品介紹影片</dd>
+        <dt>展覽</dt><dd>4/2 公佈入圍；6/26–27 香港會議展覽中心展覽及評審，6/27 頒獎（待定）</dd>
+        <dt>獎項</dt><dd>每組金、銀、銅各 1；學生發展基金每人 HK$10,000／8,000／5,000，學校發展基金 HK$100,000／75,000／50,000</dd>
+      </dl>
+    </div>
   </div>
 
   <div class="card">
@@ -392,7 +431,13 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
       <span class="small muted">剔選只儲存在你的瀏覽器</span>
     </div>
     <div class="check" id="checklist">
-      <h4 class="ck-grp">工作坊前（11 月 18 日–12 月 5 日）</h4>
+      <h4 class="ck-grp">C 創科展第一階段報名（截止 11 月 29 日 23:59）</h4>
+      <label><input type="checkbox" id="ck21"><span><span class="when">24/11</span>決定創科展參賽隊伍（1–4 名學生）、組別（初中／高中）及指導老師（全職教職員）</span></label>
+      <label><input type="checkbox" id="ck22"><span><span class="when">24/11</span>在網上平台申請帳戶；登記電郵即正式通訊渠道，建議用學校電郵</span></label>
+      <label><input type="checkbox" id="ck23"><span><span class="when">25/11</span>收齊每位學生的證明文件及同意書，掃描成檔案</span></label>
+      <label><input type="checkbox" id="ck24"><span><span class="when">26/11</span>填寫隊伍資料；如作品曾在其他比賽獲獎，於報名時申報</span></label>
+      <label><input type="checkbox" id="ck25"><span><span class="when c">27/11</span>按「提交報名申請」：確認頁面顯示「你已提交報名申請」並收到確認電郵（查垃圾郵件）</span></label>
+      <h4 class="ck-grp">A 工作坊前（11 月 18 日–12 月 5 日）</h4>
       <label><input type="checkbox" id="ck9"><span><span class="when">20/11</span>收大會確認信：記下隊伍編號及獲分配設備；未收即致電 3895 3790</span></label>
       <label><input type="checkbox" id="ck11"><span><span class="when">22/11</span>4 名隊員觀看簡介會錄影的北都發展及小米 AIoT 應用兩節，各交一頁筆記</span></label>
       <label><input type="checkbox" id="ck13"><span><span class="when">22/11</span>選定作品方案及 4 人分工（見「痛點及方案」及「製作流程」）</span></label>
@@ -419,11 +464,12 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
   <div class="sec-head">
     <span class="k">TIMEFRAME</span>
     <h2>統籌時間線</h2>
-    <p class="sub">2026 年 11 月至 2027 年 4 月；◆ 為截止日或活動日，紅線為今日。</p>
+    <p class="sub">2026 年 11 月至 2027 年 6 月；◆ 為截止日或活動日，紅線為今日。</p>
   </div>
   <div class="legend">
     <span><i style="background:var(--a)"></i>A 學生比賽</span>
     <span><i style="background:var(--b)"></i>B 教師比賽</span>
+    <span><i style="background:var(--h)"></i>C 創科展</span>
     <span><i style="background:var(--gray)"></i>校務／假期</span>
     <span><i class="d" style="background:var(--crit)"></i>正式截止</span>
   </div>
@@ -432,18 +478,20 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
   <h3>逐週安排</h3>
   <div class="tbl">
     <table>
-      <thead><tr><th class="nowrap">時段</th><th>A 學生比賽</th><th>B 教師比賽</th></tr></thead>
+      <thead><tr><th class="nowrap">時段</th><th>A 學生比賽</th><th>B 教師比賽</th><th>C 創科展</th></tr></thead>
       <tbody>
-        <tr><td class="nowrap mono">11/10–11/13</td><td>招募、組隊、確認工作坊出席；<b>11/12 前交報名表 ×2</b>；11/13 18:00 截止</td><td>11/10 16:00 簡介會；登入 Sayo.ai，決定類別及構思</td></tr>
-        <tr><td class="nowrap mono">11/16–11/20</td><td>一星期內收確認信及隊伍編號；兩隊觀看簡介會錄影（北都發展、小米 AIoT 應用兩節）；搜集北都資料（四大區、宜居宜業宜遊）；定構思</td><td>11/18 16:00 簡介會（可選）；在 Sayo 內完成 v1</td></tr>
-        <tr><td class="nowrap mono">11/23–11/28</td><td>草圖及 I/O 對照表；手提電腦預備；分配工作坊場次</td><td>課堂試用、收學生回饋 → v2；11/27 簡介會（行政工具）；<b>11/28 定稿，一次過提交</b></td></tr>
-        <tr><td class="nowrap mono">11/29–12/05</td><td>工作坊一（11/29 日 10:00 或 11/30 一 16:30）<b>領設備</b>；工作坊二（12/4 五 16:30 或 12/5 六 10:00）</td><td>11/30（一）23:59 正式截止；避免與當日下午工作坊撞期</td></tr>
-        <tr><td class="nowrap mono">12/07–12/18</td><td>開箱盤點、逐塊子板測試；12/12 校內協辦 HKJPSMC，當週暫停課後練習</td><td>評審期</td></tr>
-        <tr><td class="nowrap mono">聖誕假</td><td>原型衝刺：核心 3 個互動跑通</td><td>—</td></tr>
-        <tr><td class="nowrap mono">2027 年 1 月</td><td>1/5 提交窗口開；實體模型製作及整合；上學期考試期間暫停</td><td>得獎公布及頒獎典禮</td></tr>
-        <tr><td class="nowrap mono">2027 年 2 月</td><td>農曆新年後優化、拍片、加中英字幕；<b>2/26（五）校內完成提交</b></td><td>—</td></tr>
-        <tr><td class="nowrap mono">2027 年 3 月</td><td><b>3/5（五）18:00 正式截止</b>；3/6–3/12 海報及匯報綵排；3/13（六）作品匯報</td><td>—</td></tr>
-        <tr><td class="nowrap mono">2027 年 4 月</td><td>4/24（六）頒獎典禮（簡介會簡報亦列 5/15，待確認）；按指示歸還設備</td><td>—</td></tr>
+        <tr><td class="nowrap mono">11/10–11/13</td><td>招募、組隊、確認工作坊出席；<b>11/12 前交報名表 ×2</b>；11/13 18:00 截止</td><td>11/10 16:00 簡介會；登入 Sayo.ai，決定類別及構思</td><td>—</td></tr>
+        <tr><td class="nowrap mono">11/16–11/20</td><td>一星期內收確認信及隊伍編號；兩隊觀看簡介會錄影（北都發展、小米 AIoT 應用兩節）；搜集北都資料（四大區、宜居宜業宜遊）；定構思</td><td>11/18 16:00 簡介會（可選）；在 Sayo 內完成 v1</td><td>—</td></tr>
+        <tr><td class="nowrap mono">11/23–11/28</td><td>草圖及 I/O 對照表；手提電腦預備；分配工作坊場次</td><td>課堂試用、收學生回饋 → v2；11/27 簡介會（行政工具）；<b>11/28 定稿，一次過提交</b></td><td>第一階段報名：開帳戶、上載證明文件及同意書；<b>11/27 前按提交</b></td></tr>
+        <tr><td class="nowrap mono">11/29–12/05</td><td>工作坊一（11/29 日 10:00 或 11/30 一 16:30）<b>領設備</b>；工作坊二（12/4 五 16:30 或 12/5 六 10:00）</td><td>11/30（一）23:59 正式截止；避免與當日下午工作坊撞期</td><td><b>11/29（日）23:59 第一階段截止</b></td></tr>
+        <tr><td class="nowrap mono">12/07–12/18</td><td>開箱盤點、逐塊子板測試；12/12 校內協辦 HKJPSMC，當週暫停課後練習</td><td>評審期</td><td>大會審核證明文件；開始搜集文獻、設計訪談或問卷</td></tr>
+        <tr><td class="nowrap mono">聖誕假</td><td>原型衝刺：核心 3 個互動跑通</td><td>—</td><td>撰寫計劃書初稿（用平台範本）</td></tr>
+        <tr><td class="nowrap mono">2027 年 1 月</td><td>1/5 提交窗口開；實體模型製作及整合；上學期考試期間暫停</td><td>得獎公布及頒獎典禮</td><td>1/4 前收第二階段電郵通知，未收即聯絡創科展；測試及收集數據</td></tr>
+        <tr><td class="nowrap mono">2027 年 2 月</td><td>農曆新年後優化、拍片、加中英字幕；<b>2/26（五）校內完成提交</b></td><td>—</td><td>計劃書 PDF、2–4 張照片、介紹影片；<b>2/28（日）23:59 截止</b></td></tr>
+        <tr><td class="nowrap mono">2027 年 3 月</td><td><b>3/5（五）18:00 正式截止</b>；3/6–3/12 海報及匯報綵排；3/13（六）作品匯報</td><td>—</td><td>—</td></tr>
+        <tr><td class="nowrap mono">2027 年 4 月</td><td>4/24（六）頒獎典禮（簡介會簡報亦列 5/15，待確認）；按指示歸還設備</td><td>—</td><td>4/2（五）公佈入圍隊伍</td></tr>
+        <tr><td class="nowrap mono">2027 年 5 月</td><td>—</td><td>—</td><td>入圍隊伍必須出席：工作坊 I（5/6–8，2 小時）、工作坊 II 模擬簡報（5/20–22，30 分鐘）</td></tr>
+        <tr><td class="nowrap mono">2027 年 6 月</td><td>—</td><td>—</td><td>6/25（五）攤位佈置；6/26–27 展覽（6/26 評審日）；6/27（日）頒獎典禮（待定）</td></tr>
       </tbody>
     </table>
   </div>
@@ -1221,6 +1269,167 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
   </div>
 </section>
 
+<!-- ============ C: HKSF ============ -->
+<section class="sec h" id="hksf">
+  <div class="sec-head">
+    <span class="k">C · 學生比賽</span>
+    <h2>香港創科展 2026–2027</h2>
+    <p class="sub">Hong Kong Science Fair · 香港創新基金主辦、信和集團首席贊助；中國科技發展基金會指導，香港檢測和認證局策略夥伴。秉承「大想頭 齊創新」，以科學及創意解決生活難題。</p>
+  </div>
+
+  <div class="callout crit">
+    <h4>第一階段報名：2026-11-29（日）晚上 11:59 截止</h4>
+    <ul>
+      <li>必須在第一階段報名才能參賽，截止後不設補報</li>
+      <li>要上載<b>所有</b>學生證明文件及同意書，並按「提交報名申請」按鈕；只填欄位而沒有按提交，不算完成報名</li>
+      <li>截止前可自行在平台修改已提交內容；截止後不接受任何更改</li>
+      <li>建議 <b>11/27（五）</b>前完成，避開週末與 AIoT 工作坊一撞期</li>
+    </ul>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>比賽資料</h3>
+      <dl class="facts">
+        <dt>參賽資格</dt><dd>2026/27 年度就讀香港官立、資助或私立學校小四至中六（國際學校四至十二年級）；<b>由所屬學校提名</b></dd>
+        <dt>隊伍</dt><dd>1–4 名學生 + 1 名該校全職教職員擔任指導老師</dd>
+        <dt>組別</dt><dd>小學組（小四至小六）· <b>初中組（中一至中三）</b> · <b>高中組（中四至中六）</b></dd>
+        <dt>過往範疇</dt><dd>智慧城市及智慧生活、醫療及保健、可持續發展、教育</dd>
+        <dt>規模</dt><dd>過去五屆逾 2,200 份作品、近 9,000 名學生及老師參與；展覽共吸引近二十萬人次</dd>
+        <dt>今屆新安排</dt><dd>回歸 30 周年，首次邀請 40 隊海外隊伍來港參展（內地 20 隊、亞太地區 20 隊，包括東盟國家）</dd>
+        <dt>國際機會</dt><dd>由第二屆起，基金資助各組金獎隊伍赴瑞士參加「日內瓦國際發明展」</dd>
+        <dt>查詢</dt><dd><span class="mono">9026 3169</span>（電話及 WhatsApp，週一至五 9:00–18:00）· <span class="mono">enquiry@hksciencefair.org.hk</span>（標題列明作品編號）</dd>
+      </dl>
+    </div>
+    <div class="card">
+      <h3>重要時間表</h3>
+      <div class="tbl">
+        <table>
+          <tbody>
+            <tr><td class="nowrap"><b>第一階段報名</b></td><td class="mono">2026-10-02 至 <b>11-29（日）23:59</b></td></tr>
+            <tr><td class="nowrap">第二階段通知</td><td class="mono">2027-01-04 前收電郵；未收請盡快聯絡</td></tr>
+            <tr><td class="nowrap"><b>第二階段作品提交</b></td><td class="mono"><b>2027-02-28（日）23:59</b></td></tr>
+            <tr><td class="nowrap">公佈入圍隊伍</td><td class="mono">2027-04-02（五）</td></tr>
+            <tr><td class="nowrap">工作坊 I<sup>#</sup><br><span class="small muted">審核日及演說技巧，2 小時</span></td><td class="mono">5/6–7（四、五）16:00–18:00 或 18:30–20:30<br>或 5/8（六）10:00–12:00</td></tr>
+            <tr><td class="nowrap">工作坊 II<sup>#</sup><br><span class="small muted">模擬簡報 Mock Pitching，30 分鐘</span></td><td class="mono">5/20–21（四、五）16:30–18:00 或 18:30–20:30<br>或 5/22（六）9:30–11:00 或 11:30–13:00</td></tr>
+            <tr><td class="nowrap">攤位佈置<sup>#</sup></td><td class="mono">6/25（五）12:00–16:00</td></tr>
+            <tr><td class="nowrap">展覽<sup>#</sup> · 評審日<sup>#</sup></td><td class="mono">6/26–27（六、日）10:00–18:00；6/26 評審</td></tr>
+            <tr><td class="nowrap">頒獎典禮<sup>#</sup></td><td class="mono">6/27（日）16:30–17:30（待定）</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small muted"><sup>#</sup> 地點：香港會議展覽中心。入圍隊伍每個工作坊選一節；完成兩項工作坊並參與展覽及頒獎典禮，方可獲頒「優異獎」。</p>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="stack">
+      <h3>第一階段報名步驟</h3>
+      <ol class="steps h">
+        <li><div><b>申請帳戶</b>在網上平台開帳戶。登記電郵是主辦單位與隊伍及學校的正式通訊渠道，發到該電郵即視為已送達。</div></li>
+        <li><div><b>填資料及上載文件</b>填寫所有隊伍資料，上載每位學生的證明文件及同意書；缺任何一份都不能提交。</div></li>
+        <li><div><b>按「提交報名申請」</b>頁面下方顯示「你已提交報名申請」並收到自動確認電郵才算完成；未收到先查垃圾郵件。</div></li>
+        <li><div><b>等審核結果</b>通過審核會收到電郵通知進入第二階段；2027-01-04 前未收到，請電郵創科展查詢。</div></li>
+      </ol>
+    </div>
+    <div class="stack">
+      <h3>第二階段作品提交（2027-02-28 23:59）</h3>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>提交物</th><th>要求</th></tr></thead>
+          <tbody>
+            <tr><td class="nowrap"><b>計劃書</b></td><td>必須下載平台上的範本作品介紹，儲存為 <b>PDF，≤ 10 MB</b>，包括所有圖片、照片及文字</td></tr>
+            <tr><td class="nowrap"><b>照片或圖像</b></td><td><b>2–4 張</b>介紹作品，每張 <b>≤ 5 MB</b></td></tr>
+            <tr><td class="nowrap"><b>作品介紹影片</b></td><td>章程未列長度及格式，以平台指示為準</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small">登入平台 → 首頁左方「作品提交」→ 上載三項 → 按「提交作品」；顯示「已提交此表格」並收到確認電郵。<b>一經提交不接受任何更改。</b></p>
+    </div>
+  </div>
+
+  <h3>評分準則（初中組及高中組）</h3>
+  <div class="tbl">
+    <table class="crit-tbl">
+      <thead><tr><th>準則</th><th>評審重點</th><th class="nowrap">初中組</th><th class="nowrap">高中組</th></tr></thead>
+      <tbody>
+        <tr><td>I 問題洞察與需求分析</td><td>清楚說明問題、其重要性及背景；以研究、觀察、訪談、問卷或資料搜集支持分析</td><td><div class="pct"><b>20%</b><div class="mini"><i style="width:67%"></i></div></div></td><td><div class="pct"><b>20%</b><div class="mini"><i style="width:67%"></i></div></div></td></tr>
+        <tr><td>II 創意構思</td><td>原創或與以往做法不同；探索其他方案；較現有方案有改善；整合不同知識及技術</td><td><div class="pct"><b>25%</b><div class="mini"><i style="width:83%"></i></div></div></td><td><div class="pct"><b>20%</b><div class="mini"><i style="width:67%"></i></div></div></td></tr>
+        <tr><td>III 設計與驗證</td><td>轉化為可行的原型、模型或系統；過程系統化；以測試、實驗、數據或使用者回饋驗證；按結果持續改良</td><td><div class="pct"><b>25%</b><div class="mini"><i style="width:83%"></i></div></div></td><td><div class="pct"><b>25%</b><div class="mini"><i style="width:83%"></i></div></div></td></tr>
+        <tr><td>IV 效益與社會影響力</td><td>回應真實問題；對個人、社區、環境有正面影響；實際應用價值；高中組另看推廣、規模化或市場潛力</td><td><div class="pct"><b>20%</b><div class="mini"><i style="width:67%"></i></div></div></td><td><div class="pct"><b>25%</b><div class="mini"><i style="width:83%"></i></div></div></td></tr>
+        <tr><td>V 成果呈現</td><td>資料清晰；以準確數據支持論點；簡報、展板及模型有條理；符合比賽規定及頁數限制</td><td><div class="pct"><b>10%</b><div class="mini"><i style="width:33%"></i></div></div></td><td><div class="pct"><b>10%</b><div class="mini"><i style="width:33%"></i></div></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small muted">小學組比重為 20／30／20／20／10。與 AIoT 比賽不同，創科展初中及高中組都有 45% 分數落在「問題洞察」及「設計與驗證」，要有真實數據、測試及使用者回饋。</p>
+
+  <h3>獎項</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>獎項</th><th class="nowrap">名額</th><th>學生</th><th>指導老師</th><th>學校</th></tr></thead>
+      <tbody>
+        <tr><td class="nowrap"><b>金獎</b></td><td>每組 1</td><td class="mono">學生發展基金 HK$10,000／人</td><td class="mono">HK$5,000</td><td class="mono">HK$100,000</td></tr>
+        <tr><td class="nowrap"><b>銀獎</b></td><td>每組 1</td><td class="mono">HK$8,000／人</td><td class="mono">HK$4,000</td><td class="mono">HK$75,000</td></tr>
+        <tr><td class="nowrap"><b>銅獎</b></td><td>每組 1</td><td class="mono">HK$5,000／人</td><td class="mono">HK$2,500</td><td class="mono">HK$50,000</td></tr>
+        <tr><td class="nowrap"><b>優異獎</b>（入圍隊伍）</td><td>最多 100 隊</td><td>全隊 HK$5,000（由學校平分給隊員）、獎牌、獎狀、會展展出</td><td>信和集團酒店住宿套票</td><td>獎座</td></tr>
+        <tr><td class="nowrap"><b>最受歡迎大獎</b></td><td>每組 1</td><td>酒店自助晚餐（四位）／人、獎狀；展覽入場人士投票</td><td>酒店自助晚餐（四位）</td><td>獎座</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <span class="tag h">特別獎 · 中學組</span>
+      <h3>檢測和認證專項獎</h3>
+      <p class="small muted">香港檢測和認證局設立，從初中組及高中組入圍隊伍中選出金、銀、銅各 1 名；獎金與上表金銀銅相同。</p>
+      <div class="bars wide">
+        <div class="bar-row"><span>檢測認證相關性</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--h)"></div></div><span class="v">30%</span></div>
+        <div class="bar-row"><span>可行及實用性</span><div class="bar-track"><div class="bar-fill" style="width:83%;background:var(--h)"></div></div><span class="v">25%</span></div>
+        <div class="bar-row"><span>科學技術價值</span><div class="bar-track"><div class="bar-fill" style="width:67%;background:var(--h)"></div></div><span class="v">20%</span></div>
+        <div class="bar-row"><span>創意及創新</span><div class="bar-track"><div class="bar-fill" style="width:50%;background:var(--h)"></div></div><span class="v">15%</span></div>
+        <div class="bar-row"><span>表達與溝通</span><div class="bar-track"><div class="bar-fill" style="width:33%;background:var(--h)"></div></div><span class="v">10%</span></div>
+      </div>
+      <p class="small">重點：作品要清楚展示開發過程中如何做檢測及認證，例如以參考儀器校準感測器、按國際標準測試。</p>
+    </div>
+    <div class="card">
+      <span class="tag h">特別獎 · 高中組</span>
+      <h3>研究項目卓越表現獎（今屆新設）</h3>
+      <p class="small muted">從高中組入圍隊伍額外評分，最多 3 隊；學生發展基金 HK$5,000／人，老師 HK$2,500，學校獎座。評審認為未達標準可從缺。</p>
+      <div class="bars wide">
+        <div class="bar-row"><span>持續投入研究</span><div class="bar-track"><div class="bar-fill" style="width:67%;background:var(--h)"></div></div><span class="v">20%</span></div>
+        <div class="bar-row"><span>反覆驗證及優化</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--h)"></div></div><span class="v">30%</span></div>
+        <div class="bar-row"><span>面對失敗應變</span><div class="bar-track"><div class="bar-fill" style="width:67%;background:var(--h)"></div></div><span class="v">20%</span></div>
+        <div class="bar-row"><span>研究歷程完整性</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--h)"></div></div><span class="v">30%</span></div>
+      </div>
+      <p class="small">重點：由第一日起保留研究日誌，記錄每次測試、失敗及改良，並以文獻設計實驗。</p>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="callout">
+      <h4>注意事項</h4>
+      <ul>
+        <li>作品如曾在其他比賽獲任何獎項，<b>必須於報名時申報</b></li>
+        <li>作品不得侵犯第三者知識產權；須搜集學術文獻、研究報告、專利及現有產品，並列明所有參考資料出處</li>
+        <li>登記電郵發出的通知即視為已送達參加者及學校，要定期查閱</li>
+        <li>第二階段提交後不得更改；計劃書必須用平台範本</li>
+        <li>獎金：優異獎 HK$5,000 由學校平分給隊員；金銀銅學生發展基金按人數計，例如 2 人隊伍獲金獎合共 HK$20,000</li>
+      </ul>
+    </div>
+    <div class="callout h">
+      <h4>LPS 參賽策略</h4>
+      <ul>
+        <li><b>與 AIoT 比賽時間重疊</b>：創科展作品 2/28 截止，AIoT 作品 3/5 截止；同一隊兩邊參賽，研究資料及數據可以共用。</li>
+        <li><b>設備限制</b>：小米設備在 AIoT 比賽後須歸還，但創科展展覽在 6/26–27。沿用同一題目的話，展品要改用學校自備硬件（例如 ESP32）重建，或另選題目。</li>
+        <li><b>原創規定</b>：AIoT 章程要求作品「原創並未經發佈」；同一作品兩邊參賽前，先向 AIoT 籌委會（3895 3790）確認。</li>
+        <li><b>評分取向</b>：創科展重視訪談、問卷、測試數據及改良紀錄。「痛點及方案」章節的北區資料可作問題洞察起點，再加學生自己的實地調查。</li>
+        <li><b>延續舊作</b>：如以 Team 2708 SilverPal Bot 等舊作品再參賽，曾獲獎項須於報名時申報，並要清楚展示今年的改良。</li>
+        <li>高中組隊伍可同時瞄準「研究項目卓越表現獎」；以感測器量度為主的方案（例如 2-B 水浸哨站、2-C 熱壓力網）較易爭取「檢測和認證專項獎」。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <!-- ============ LINKS ============ -->
 <section class="sec" id="links">
   <div class="sec-head">
@@ -1258,6 +1467,16 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
       </div>
       <div class="copyline"><code>support@sayo.ai</code><button class="btn" data-copy="support@sayo.ai">複製查詢電郵</button></div>
     </div>
+    <div class="stack">
+      <span class="tag h">C · 創科展</span>
+      <div class="links">
+        <a class="link keyh" href="https://hksfr.awardsplatform.com/" target="_blank" rel="noopener"><b>香港創科展網上平台（報名及作品提交）</b><span>hksfr.awardsplatform.com</span><i>報名／繳交</i></a>
+        <a class="link" href="https://www.hksciencefair.org.hk/" target="_blank" rel="noopener"><b>香港創科展網站</b><span>hksciencefair.org.hk</span><i>網站</i></a>
+        <a class="link" href="https://www.facebook.com/HongKongScienceFair" target="_blank" rel="noopener"><b>Facebook 專頁</b><span>facebook.com/HongKongScienceFair</span><i>社交</i></a>
+      </div>
+      <div class="copyline"><code>enquiry@hksciencefair.org.hk</code><button class="btn" data-copy="enquiry@hksciencefair.org.hk">複製查詢電郵</button></div>
+      <div class="copyline"><code>9026 3169（電話及 WhatsApp）</code><button class="btn" data-copy="9026 3169">複製查詢電話</button></div>
+    </div>
   </div>
 </section>
 
@@ -1289,11 +1508,21 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
         <li>CPD 證書發放方式及時間</li>
       </ol>
     </div>
+    <div class="card">
+      <span class="tag h">C · 創科展</span>
+      <ol>
+        <li>「學生證明文件」具體指甚麼（學生證、學校證明信？），同意書是否在平台下載</li>
+        <li>參賽隊伍成員、組別及指導老師</li>
+        <li>作品介紹影片的長度及格式；計劃書範本頁數限制</li>
+        <li>同一作品可否同時參加 AIoT 比賽（向兩邊主辦查詢）</li>
+        <li>學校提名程序：校方是否需要另外簽署提名</li>
+      </ol>
+    </div>
   </div>
 </section>
 
 <footer>
-  <p>資料來源：城大比賽網站及《比賽詳情》章程（30 Oct 2026 版）、比賽簡介會簡報（20 Oct 2026，19 頁已逐頁核對）、小米設備介紹 PDF；Sayo 比賽頁及教師簡介會報名表。北區痛點資料來源列於「痛點及方案」章節。資料整理於 2026-11-10，一切以主辦單位最新公布為準。</p>
+  <p>資料來源：城大比賽網站及《比賽詳情》章程（30 Oct 2026 版）、比賽簡介會簡報（20 Oct 2026，19 頁已逐頁核對）、小米設備介紹 PDF；Sayo 比賽頁及教師簡介會報名表；《香港創科展 2026-2027 比賽章程》（TC-2026.10.02）。北區痛點資料來源列於「痛點及方案」章節。最後更新 2026-11-23，一切以主辦單位最新公布為準。</p>
 </footer>
 </main>
 
@@ -1316,14 +1545,14 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
   });
 
   // ---------- gantt ----------
-  var G0 = utc('2026-11-09'), G1 = utc('2027-05-01'), SPAN = G1 - G0;
+  var G0 = utc('2026-11-09'), G1 = utc('2027-07-20'), SPAN = G1 - G0;
   function pct(s){ return Math.max(0, Math.min(100, (utc(s) - G0) / SPAN * 100)); }
   function md(s){ var p=s.split('-'); return (+p[1])+'/'+(+p[2]); }
   var rows = [
     {grp:'A　學生比賽'},
     {t:'招募及報名', d:'11/10–11/13', bars:[['a','2026-11-10','2026-11-13']], ms:[['c','2026-11-13','報名截止']]},
     {t:'北都研究及構思', d:'11/14–11/28', bars:[['a','2026-11-14','2026-11-28']]},
-    {t:'工作坊一、二（城大）', d:'11/29–12/5', bars:[['a win','2026-11-29','2026-12-05']], ms:[['a','2026-11-29','領設備'],['a','2026-12-05','']]},
+    {t:'工作坊一、二（城大）', d:'11/29–12/5', bars:[['a win','2026-11-29','2026-12-05']], ms:[['a','2026-11-29','領設備']]},
     {t:'盤點及模組測試', d:'11/30–12/18', bars:[['a','2026-11-30','2026-12-18']]},
     {t:'原型衝刺（聖誕假）', d:'12/19–1/2', bars:[['a','2026-12-19','2027-01-02']]},
     {t:'實體模型及整合', d:'1/3–2/5', bars:[['a','2027-01-03','2027-02-05']]},
@@ -1337,11 +1566,17 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
     {t:'提交作品', d:'校內 11/28 · 截止 11/30', ms:[['b','2026-11-28',''],['c','2026-11-30','截止']]},
     {t:'評審', d:'12 月', bars:[['b win','2026-12-01','2026-12-31']]},
     {t:'得獎公布及頒獎', d:'2027 年 1 月', bars:[['b win','2027-01-01','2027-01-31']]},
+    {grp:'C　香港創科展'},
+    {t:'第一階段網上報名', d:'10/2–11/29 23:59', bars:[['h','2026-11-09','2026-11-29']], ms:[['c','2026-11-29','報名截止']]},
+    {t:'計劃書、照片、影片', d:'12/1–2/28 23:59', bars:[['h','2026-12-01','2027-02-26']], ms:[['c','2027-02-28','提交截止']]},
+    {t:'公佈入圍隊伍', d:'4/2', ms:[['h','2027-04-02','入圍']]},
+    {t:'工作坊 I、II（模擬簡報）', d:'5/6–8 · 5/20–22', bars:[['h','2027-05-06','2027-05-08'],['h','2027-05-20','2027-05-22']]},
+    {t:'展覽、評審及頒獎（會展）', d:'6/25–27', bars:[['h','2027-06-25','2027-06-27']], ms:[['h','2027-06-27','頒獎']]},
     {grp:'校務及假期'},
     {t:'HKJPSMC（LPS 協辦）', d:'12/12', ms:[['g','2026-12-12','']]},
     {t:'農曆新年', d:'2027/2/6', ms:[['g','2027-02-06','']]}
   ];
-  var months = [['2026-11-09','11月'],['2026-12-01','12月'],['2027-01-01','2027·1月'],['2027-02-01','2月'],['2027-03-01','3月'],['2027-04-01','4月']];
+  var months = [['2026-11-09','11月'],['2026-12-01','12月'],['2027-01-01','2027·1月'],['2027-02-01','2月'],['2027-03-01','3月'],['2027-04-01','4月'],['2027-05-01','5月'],['2027-06-01','6月'],['2027-07-01','7月']];
   var h = '<div class="g-head"><div class="g-lbl small muted">項目</div><div class="g-trk">';
   months.forEach(function(m){ h += '<div class="g-month" style="left:'+pct(m[0])+'%">'+m[1]+'</div>'; });
   h += '</div></div>';
