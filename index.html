@@ -14,7 +14,7 @@
 :root{
   --bg:#F2F4F6; --surface:#FFFFFF; --sunk:#E8ECF0; --ink:#16212C; --muted:#56636F;
   --line:#D5DCE3; --line-strong:#B9C3CD;
-  --a:#C2410C; --a-soft:#FCEBDD; --b:#0B7A75; --b-soft:#DDF1EF; --h:#3B4CCA; --h-soft:#E4E7FB;
+  --a:#C2410C; --a-soft:#FCEBDD; --b:#0B7A75; --b-soft:#DDF1EF; --h:#3B4CCA; --h-soft:#E4E7FB; --p:#3D7A1E; --p-soft:#E5F1DC;
   --crit:#B42318; --crit-soft:#FDE7E4; --gray:#6F7B87; --gray-soft:#E3E8ED;
   --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",system-ui,sans-serif;
   --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
@@ -24,7 +24,7 @@
   :root:not([data-theme="light"]){
     --bg:#0E1318; --surface:#161D24; --sunk:#1D2630; --ink:#E5EBF0; --muted:#97A4B0;
     --line:#29343F; --line-strong:#3A4754;
-    --a:#FF8A4C; --a-soft:#3A2416; --b:#3EC6BE; --b-soft:#123230; --h:#9DA9FF; --h-soft:#1E2448;
+    --a:#FF8A4C; --a-soft:#3A2416; --b:#3EC6BE; --b-soft:#123230; --h:#9DA9FF; --h-soft:#1E2448; --p:#9ED46F; --p-soft:#1D2D14;
     --crit:#FF7A6B; --crit-soft:#3B1C19; --gray:#8D99A5; --gray-soft:#24303A;
     color-scheme:dark;
   }
@@ -32,7 +32,7 @@
 :root[data-theme="dark"]{
   --bg:#0E1318; --surface:#161D24; --sunk:#1D2630; --ink:#E5EBF0; --muted:#97A4B0;
   --line:#29343F; --line-strong:#3A4754;
-  --a:#FF8A4C; --a-soft:#3A2416; --b:#3EC6BE; --b-soft:#123230; --h:#9DA9FF; --h-soft:#1E2448;
+  --a:#FF8A4C; --a-soft:#3A2416; --b:#3EC6BE; --b-soft:#123230; --h:#9DA9FF; --h-soft:#1E2448; --p:#9ED46F; --p-soft:#1D2D14;
   --crit:#FF7A6B; --crit-soft:#3B1C19; --gray:#8D99A5; --gray-soft:#24303A;
   color-scheme:dark;
 }
@@ -69,7 +69,7 @@ li+li{margin-top:4px}
 .alert p{min-width:0}
 .alert strong{color:var(--crit)}
 
-.count-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.count-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(186px,1fr));gap:12px}
 .count{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:grid;gap:4px;min-width:0}
 .count .what{font-size:13px;color:var(--muted);font-weight:500}
 .count .days{font-family:var(--f-mono);font-size:30px;font-weight:700;line-height:1.1}
@@ -283,6 +283,19 @@ details.srcs ul{margin-top:8px}
 table.roster td{vertical-align:middle}
 #team{scroll-margin-top:64px}
 
+/* D track: CLP */
+.count.p .days{color:var(--p)}
+.secnav a.p{color:var(--p)}
+.sec.p .sec-head{border-color:var(--p)} .sec.p .sec-head .k{color:var(--p)}
+.tag.p{background:var(--p-soft);color:var(--p)}
+.g-bar.p{background:var(--p)} .g-ms.p{background:var(--p)}
+.qlink.p .ql-k{color:var(--p)}
+ol.steps.p>li::before{color:var(--p)}
+.link.keyp{border-color:var(--p)} .link.keyp i{color:var(--p)}
+.callout.p{background:var(--p-soft);border-color:var(--p)}
+.bars.p .bar-fill{background:var(--p)}
+.grid2.two{grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr))}
+
 /* C track: HKSF */
 .count.h .days{color:var(--h)}
 .secnav a.h{color:var(--h)}
@@ -320,9 +333,9 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
 
 <div class="wrap">
   <header class="hero">
-    <div class="eyebrow">廖寶珊紀念書院 · AI／STEM 統籌 · 最後更新 2026-11-23</div>
+    <div class="eyebrow">廖寶珊紀念書院 · AI／STEM 統籌 · 最後更新 2026-11-27</div>
     <h1>STEM<span class="slash">／</span>AI 比賽統籌 2026–27</h1>
-    <p class="lead"><b>A 學生組</b>「三十港章 慧智北都」AIoT 模型設計比賽（城大 × 津中議會 × 中文中學聯會，小米設備）、<b>B 教師組</b> Sayo AI 創新教學應用大賽（Vibe Coding）及 <b>C 學生組</b>香港創科展 2026–2027。比賽資料、北區痛點及 12 個作品方案、製作流程、統籌時間線及所有報名／繳交連結。</p>
+    <p class="lead"><b>A 學生組</b>「三十港章 慧智北都」AIoT 模型設計比賽（城大 × 津中議會 × 中文中學聯會，小米設備）、<b>B 教師組</b> Sayo AI 創新教學應用大賽（Vibe Coding）、<b>C 學生組</b>香港創科展 2026–2027 及 <b>D 初中組</b>中電「校園工程師」能源築未來挑戰賽。比賽資料、北區痛點及 12 個作品方案、製作流程、統籌時間線及所有報名／繳交連結。</p>
     <div class="alert" role="note">
       <div class="dot" aria-hidden="true"></div>
       <p><strong>11 月 29 日（日）兩件事：</strong>① <b>香港創科展第一階段報名當晚 23:59 截止</b>，須在網上平台上載所有學生證明文件及同意書，並按「提交報名申請」；未於第一階段報名即不能參賽。② AIoT 比賽工作坊一 10:00（或 30 日 16:30）在城大領設備，須有不少於一半組員出席，缺席即取消資格。</p>
@@ -338,6 +351,11 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
         <span class="days" data-deadline="2026-11-29">11<small>日</small></span>
         <span class="when">2026-11-29（日）或 11-30（一）</span>
       </div>
+      <div class="count p">
+        <span class="what">D 中電挑戰賽報名截止</span>
+        <span class="days" data-deadline="2026-12-18">21<small>日</small></span>
+        <span class="when">2026-12-18（五）23:59</span>
+      </div>
       <div class="count b">
         <span class="what">B Sayo 教師作品截止</span>
         <span class="days" data-deadline="2026-11-30">20<small>日</small></span>
@@ -352,11 +370,11 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
     <div class="quick-wrap">
       <div class="eyebrow">報名及繳交連結</div>
       <div class="quick">
-        <a class="qlink a" href="https://docs.google.com/forms/d/e/1FAIpQLSdPujojp8c0FD4tCDd4vWZXnSRa5nbDKkJguN37jE4mttb5aw/viewform" target="_blank" rel="noopener"><span class="ql-k">A 學生 · 報名</span><b>中學組報名表</b><span class="d">已於 2026-11-13（五）18:00 截止</span></a>
         <a class="qlink a" href="https://www.cityu.edu.hk/skltmw/AIot_Comp/submission.html" target="_blank" rel="noopener"><span class="ql-k">A 學生 · 繳交</span><b>作品提交及匯報</b><span class="d">2027-01-05 至 03-05 18:00；Drive 文件夾連結電郵 vpceaiotcomp@gapps.cityu.edu.hk</span></a>
         <a class="qlink b" href="https://sayo.ai/zh-HK/sign-in" target="_blank" rel="noopener"><span class="ql-k">B 教師 · 註冊及繳交</span><b>登入 Sayo.ai 創作及提交</b><span class="d">學校電郵登入；截止 2026-11-30（一）23:59</span></a>
         <a class="qlink b" href="https://docs.google.com/forms/d/e/1FAIpQLSdlGrn8smru6vwP43SokpiSQcyaKG_NnxQoyrqdTEDpfYMU0Q/viewform" target="_blank" rel="noopener"><span class="ql-k">B 教師 · 簡介會</span><b>教師線上簡介會報名</b><span class="d">11/27、12/2 16:00；每場 1 小時 CPD</span></a>
         <a class="qlink h" href="https://hksfr.awardsplatform.com/" target="_blank" rel="noopener"><span class="ql-k">C 創科展 · 報名及繳交</span><b>香港創科展網上平台</b><span class="d">第一階段報名截止 2026-11-29（日）23:59；作品提交截止 2027-02-28（日）23:59</span></a>
+        <a class="qlink p" href="https://forms.gle/qgj6mWLPnvUz2CyX8" target="_blank" rel="noopener"><span class="ql-k">D 中電 · 報名</span><b>能源築未來挑戰賽報名表</b><span class="d">截止 2026-12-18（五）23:59；計劃書 2027-02-01</span></a>
       </div>
     </div>
   </header>
@@ -372,6 +390,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
     <a class="a" href="#build">製作流程</a>
     <a class="b" href="#teacher">B 教師比賽</a>
     <a class="h" href="#hksf">C 創科展</a>
+    <a class="p" href="#clp">D 中電挑戰賽</a>
     <a href="#links">連結總表</a>
     <a href="#open-questions">待確認</a>
   </div>
@@ -386,7 +405,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
     <h2>總覽、參賽隊伍及行動清單</h2>
   </div>
 
-  <div class="grid2">
+  <div class="grid2 two">
     <div class="card">
       <span class="tag a">A · 學生比賽</span>
       <h3>「三十港章 慧智北都」AIoT 模型設計比賽</h3>
@@ -423,6 +442,18 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
         <dt>獎項</dt><dd>每組金、銀、銅各 1；學生發展基金每人 HK$10,000／8,000／5,000，學校發展基金 HK$100,000／75,000／50,000</dd>
       </dl>
     </div>
+    <div class="card">
+      <span class="tag p">D · 初中比賽</span>
+      <h3>中電「校園工程師」能源築未來挑戰賽</h3>
+      <dl class="facts">
+        <dt>主辦</dt><dd>中華電力；教育局、香港工程師學會電機分部、香港教育城支持；星島新聞集團統籌</dd>
+        <dt>主題</dt><dd>「智」韌未來：以 AI、IoT、大數據、機械人提升電網韌性及供電可靠性</dd>
+        <dt>參賽</dt><dd>中一至中三；每隊 3–5 人可跨級；以學校名義報名，每校隊數不限；費用全免</dd>
+        <dt>報名</dt><dd><b>2026-12-18（五）23:59</b> 前填 Google Form</dd>
+        <dt>初賽</dt><dd><b>2027-02-01</b> 前交計劃書及原型概念圖，毋須實體原型</dd>
+        <dt>獎項</dt><dd>冠 HK$20,000、亞 HK$15,000、季 HK$10,000 禮券；十強獲 HK$10,000 原型開發資助</dd>
+      </dl>
+    </div>
   </div>
 
   <div class="card">
@@ -437,6 +468,11 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
       <label><input type="checkbox" id="ck23"><span><span class="when">25/11</span>收齊每位學生的證明文件及同意書，掃描成檔案</span></label>
       <label><input type="checkbox" id="ck24"><span><span class="when">26/11</span>填寫隊伍資料；如作品曾在其他比賽獲獎，於報名時申報</span></label>
       <label><input type="checkbox" id="ck25"><span><span class="when c">27/11</span>按「提交報名申請」：確認頁面顯示「你已提交報名申請」並收到確認電郵（查垃圾郵件）</span></label>
+      <h4 class="ck-grp">D 中電挑戰賽報名（截止 12 月 18 日 23:59）</h4>
+      <label><input type="checkbox" id="ck31"><span><span class="when">4/12</span>定隊伍（3–5 名中一至中三學生）及指導老師；同一學生在此比賽只可參加一隊</span></label>
+      <label><input type="checkbox" id="ck32"><span><span class="when">11/12</span>填 Google Form 以學校名義報名（截止 12/18 23:59）</span></label>
+      <label><input type="checkbox" id="ck33"><span><span class="when">11/12</span>查詢及申請校園講座（50 個名額）及兩館參觀（各 10 間學校），先到先得</span></label>
+      <label><input type="checkbox" id="ck34"><span><span class="when">22/1</span>計劃書及原型概念圖校內定稿（2/1 截止）</span></label>
       <h4 class="ck-grp">A 工作坊前（11 月 18 日–12 月 5 日）</h4>
       <label><input type="checkbox" id="ck9"><span><span class="when">20/11</span>收大會確認信：記下隊伍編號及獲分配設備；未收即致電 3895 3790</span></label>
       <label><input type="checkbox" id="ck11"><span><span class="when">22/11</span>4 名隊員觀看簡介會錄影的北都發展及小米 AIoT 應用兩節，各交一頁筆記</span></label>
@@ -464,12 +500,13 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
   <div class="sec-head">
     <span class="k">TIMEFRAME</span>
     <h2>統籌時間線</h2>
-    <p class="sub">2026 年 11 月至 2027 年 6 月；◆ 為截止日或活動日，紅線為今日。</p>
+    <p class="sub">2026 年 11 月至 2027 年 7 月；◆ 為截止日或活動日，紅線為今日。</p>
   </div>
   <div class="legend">
     <span><i style="background:var(--a)"></i>A 學生比賽</span>
     <span><i style="background:var(--b)"></i>B 教師比賽</span>
     <span><i style="background:var(--h)"></i>C 創科展</span>
+    <span><i style="background:var(--p)"></i>D 中電挑戰賽</span>
     <span><i style="background:var(--gray)"></i>校務／假期</span>
     <span><i class="d" style="background:var(--crit)"></i>正式截止</span>
   </div>
@@ -478,20 +515,21 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
   <h3>逐週安排</h3>
   <div class="tbl">
     <table>
-      <thead><tr><th class="nowrap">時段</th><th>A 學生比賽</th><th>B 教師比賽</th><th>C 創科展</th></tr></thead>
+      <thead><tr><th class="nowrap">時段</th><th>A 學生比賽</th><th>B 教師比賽</th><th>C 創科展</th><th>D 中電挑戰賽</th></tr></thead>
       <tbody>
-        <tr><td class="nowrap mono">11/10–11/13</td><td>招募、組隊、確認工作坊出席；<b>11/12 前交報名表 ×2</b>；11/13 18:00 截止</td><td>11/10 16:00 簡介會；登入 Sayo.ai，決定類別及構思</td><td>—</td></tr>
-        <tr><td class="nowrap mono">11/16–11/20</td><td>一星期內收確認信及隊伍編號；兩隊觀看簡介會錄影（北都發展、小米 AIoT 應用兩節）；搜集北都資料（四大區、宜居宜業宜遊）；定構思</td><td>11/18 16:00 簡介會（可選）；在 Sayo 內完成 v1</td><td>—</td></tr>
-        <tr><td class="nowrap mono">11/23–11/28</td><td>草圖及 I/O 對照表；手提電腦預備；分配工作坊場次</td><td>課堂試用、收學生回饋 → v2；11/27 簡介會（行政工具）；<b>11/28 定稿，一次過提交</b></td><td>第一階段報名：開帳戶、上載證明文件及同意書；<b>11/27 前按提交</b></td></tr>
-        <tr><td class="nowrap mono">11/29–12/05</td><td>工作坊一（11/29 日 10:00 或 11/30 一 16:30）<b>領設備</b>；工作坊二（12/4 五 16:30 或 12/5 六 10:00）</td><td>11/30（一）23:59 正式截止；避免與當日下午工作坊撞期</td><td><b>11/29（日）23:59 第一階段截止</b></td></tr>
-        <tr><td class="nowrap mono">12/07–12/18</td><td>開箱盤點、逐塊子板測試；12/12 校內協辦 HKJPSMC，當週暫停課後練習</td><td>評審期</td><td>大會審核證明文件；開始搜集文獻、設計訪談或問卷</td></tr>
-        <tr><td class="nowrap mono">聖誕假</td><td>原型衝刺：核心 3 個互動跑通</td><td>—</td><td>撰寫計劃書初稿（用平台範本）</td></tr>
-        <tr><td class="nowrap mono">2027 年 1 月</td><td>1/5 提交窗口開；實體模型製作及整合；上學期考試期間暫停</td><td>得獎公布及頒獎典禮</td><td>1/4 前收第二階段電郵通知，未收即聯絡創科展；測試及收集數據</td></tr>
-        <tr><td class="nowrap mono">2027 年 2 月</td><td>農曆新年後優化、拍片、加中英字幕；<b>2/26（五）校內完成提交</b></td><td>—</td><td>計劃書 PDF、2–4 張照片、介紹影片；<b>2/28（日）23:59 截止</b></td></tr>
-        <tr><td class="nowrap mono">2027 年 3 月</td><td><b>3/5（五）18:00 正式截止</b>；3/6–3/12 海報及匯報綵排；3/13（六）作品匯報</td><td>—</td><td>—</td></tr>
-        <tr><td class="nowrap mono">2027 年 4 月</td><td>4/24（六）頒獎典禮（簡介會簡報亦列 5/15，待確認）；按指示歸還設備</td><td>—</td><td>4/2（五）公佈入圍隊伍</td></tr>
-        <tr><td class="nowrap mono">2027 年 5 月</td><td>—</td><td>—</td><td>入圍隊伍必須出席：工作坊 I（5/6–8，2 小時）、工作坊 II 模擬簡報（5/20–22，30 分鐘）</td></tr>
-        <tr><td class="nowrap mono">2027 年 6 月</td><td>—</td><td>—</td><td>6/25（五）攤位佈置；6/26–27 展覽（6/26 評審日）；6/27（日）頒獎典禮（待定）</td></tr>
+        <tr><td class="nowrap mono">11/10–11/13</td><td>招募、組隊、確認工作坊出席；<b>11/12 前交報名表 ×2</b>；11/13 18:00 截止</td><td>11/10 16:00 簡介會；登入 Sayo.ai，決定類別及構思</td><td>—</td><td>—</td></tr>
+        <tr><td class="nowrap mono">11/16–11/20</td><td>一星期內收確認信及隊伍編號；兩隊觀看簡介會錄影（北都發展、小米 AIoT 應用兩節）；搜集北都資料（四大區、宜居宜業宜遊）；定構思</td><td>11/18 16:00 簡介會（可選）；在 Sayo 內完成 v1</td><td>—</td><td>—</td></tr>
+        <tr><td class="nowrap mono">11/23–11/28</td><td>草圖及 I/O 對照表；手提電腦預備；分配工作坊場次</td><td>課堂試用、收學生回饋 → v2；11/27 簡介會（行政工具）；<b>11/28 定稿，一次過提交</b></td><td>第一階段報名：開帳戶、上載證明文件及同意書；<b>11/27 前按提交</b></td><td>11/24 網上簡介會（已過）</td></tr>
+        <tr><td class="nowrap mono">11/29–12/05</td><td>工作坊一（11/29 日 10:00 或 11/30 一 16:30）<b>領設備</b>；工作坊二（12/4 五 16:30 或 12/5 六 10:00）</td><td>11/30（一）23:59 正式截止；避免與當日下午工作坊撞期</td><td><b>11/29（日）23:59 第一階段截止</b></td><td>定隊伍及指導老師；申請校園講座及參觀</td></tr>
+        <tr><td class="nowrap mono">12/07–12/18</td><td>開箱盤點、逐塊子板測試；12/12 校內協辦 HKJPSMC，當週暫停課後練習</td><td>評審期</td><td>大會審核證明文件；開始搜集文獻、設計訪談或問卷</td><td><b>12/18（五）23:59 報名截止</b></td></tr>
+        <tr><td class="nowrap mono">聖誕假</td><td>原型衝刺：核心 3 個互動跑通</td><td>—</td><td>撰寫計劃書初稿（用平台範本）</td><td>構思方案、畫原型概念圖</td></tr>
+        <tr><td class="nowrap mono">2027 年 1 月</td><td>1/5 提交窗口開；實體模型製作及整合；上學期考試期間暫停</td><td>得獎公布及頒獎典禮</td><td>1/4 前收第二階段電郵通知，未收即聯絡創科展；測試及收集數據</td><td>撰寫計劃書；1/22 校內定稿</td></tr>
+        <tr><td class="nowrap mono">2027 年 2 月</td><td>農曆新年後優化、拍片、加中英字幕；<b>2/26（五）校內完成提交</b></td><td>—</td><td>計劃書 PDF、2–4 張照片、介紹影片；<b>2/28（日）23:59 截止</b></td><td><b>2/1（一）計劃書及概念圖截止</b></td></tr>
+        <tr><td class="nowrap mono">2027 年 3 月</td><td><b>3/5（五）18:00 正式截止</b>；3/6–3/12 海報及匯報綵排；3/13（六）作品匯報</td><td>—</td><td>—</td><td>3 月初公布十強；十強開始原型開發</td></tr>
+        <tr><td class="nowrap mono">2027 年 4 月</td><td>4/24（六）頒獎典禮（簡介會簡報亦列 5/15，待確認）；按指示歸還設備</td><td>—</td><td>4/2（五）公佈入圍隊伍</td><td>十強：到校 AI 工作坊、參觀龍鼓灘發電廠及 Grid-V 監測中心</td></tr>
+        <tr><td class="nowrap mono">2027 年 5 月</td><td>—</td><td>—</td><td>入圍隊伍必須出席：工作坊 I（5/6–8，2 小時）、工作坊 II 模擬簡報（5/20–22，30 分鐘）</td><td>5 月底業界工程師指導、優化原型</td></tr>
+        <tr><td class="nowrap mono">2027 年 6 月</td><td>—</td><td>—</td><td>6/25（五）攤位佈置；6/26–27 展覽（6/26 評審日）；6/27（日）頒獎典禮（待定）</td><td>6 月底交最終報告書及作品簡報</td></tr>
+        <tr><td class="nowrap mono">2027 年 7 月</td><td>—</td><td>—</td><td>—</td><td>7 月上旬決賽：簡報、展示原型及示範；頒獎典禮</td></tr>
       </tbody>
     </table>
   </div>
@@ -1430,13 +1468,155 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
   </div>
 </section>
 
+<!-- ============ D: CLP ============ -->
+<section class="sec p" id="clp">
+  <div class="sec-head">
+    <span class="k">D · 初中比賽</span>
+    <h2>中電「校園工程師」能源築未來挑戰賽 2026/27</h2>
+    <p class="sub">CLP Engineer in School Programme · 中華電力主辦；教育局、香港工程師學會電機分部、香港教育城支持；星島新聞集團統籌。計劃自 2016 年推出，已接觸逾 270 間中學、80,000 名學生。</p>
+  </div>
+
+  <div class="callout p">
+    <h4>報名：2026-12-18（五）晚上 11:59 截止 · 費用全免</h4>
+    <ul>
+      <li>以學校名義報名，經 <a href="https://forms.gle/qgj6mWLPnvUz2CyX8" target="_blank" rel="noopener">Google Form</a> 遞交</li>
+      <li>初賽只需計劃書及原型概念圖，<b>毋須製作實體原型</b>；計劃書 <b>2027-02-01</b> 截止</li>
+      <li>校園講座及兩館參觀名額有限，先到先得，宜與報名同時查詢</li>
+    </ul>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>比賽資料</h3>
+      <dl class="facts">
+        <dt>主題</dt><dd>「智」韌未來：運用 AI、IoT、大數據分析、機械人技術等，就電力行業的挑戰提出創新方案，提升電網韌性及供電可靠性</dd>
+        <dt>範疇</dt><dd>電網監測、設備巡檢、預測性維護、極端天氣應對、能源管理、再生能源整合</dd>
+        <dt>對象</dt><dd>2026/27 學年就讀香港中學<b>中一至中三</b>的學生</dd>
+        <dt>隊伍</dt><dd>每隊 <b>3–5 名</b>學生，可跨級；每位學生只可參加一隊；每隊 1 名教師任指導老師；每校隊數不限</dd>
+        <dt>決賽原型</dt><dd>可為實體模型、軟件應用程式、模擬系統、AI 模型、數碼展示方案或其他可展示創新概念的作品</dd>
+        <dt>證書</dt><dd>每位參賽隊員獲發電子參與證書</dd>
+        <dt>查詢</dt><dd><span class="mono">6733 6400</span> · <span class="mono">clp_eis2026@singtaonewscorp.com</span>（星島新聞集團）</dd>
+      </dl>
+    </div>
+    <div class="card">
+      <h3>重要日期</h3>
+      <div class="tbl">
+        <table>
+          <tbody>
+            <tr><td class="mono nowrap">2026-10-27</td><td>開始接受報名</td></tr>
+            <tr><td class="mono nowrap">2026-11-18 至 2027-07-15</td><td>校園講座、參觀中電學院創新電力館及中電鐘樓文化館</td></tr>
+            <tr><td class="mono nowrap">2026-11-24</td><td>網上簡介會（已過）</td></tr>
+            <tr><td class="mono nowrap"><b>2026-12-18（五）23:59</b></td><td><b>截止報名</b></td></tr>
+            <tr><td class="mono nowrap"><b>2027-02-01（一）</b></td><td><b>截止遞交計劃書</b>（及原型概念圖）</td></tr>
+            <tr><td class="mono nowrap">2027 年 3 月初</td><td>公布決賽十強</td></tr>
+            <tr><td class="mono nowrap">2027 年 3–5 月</td><td>十強原型開發及專屬活動</td></tr>
+            <tr><td class="mono nowrap">2027 年 5 月底</td><td>專業工程師諮詢指導；優化原型</td></tr>
+            <tr><td class="mono nowrap">2027 年 6 月底</td><td>遞交最終報告書及作品簡報</td></tr>
+            <tr><td class="mono nowrap">2027 年 7 月上旬</td><td>展示原型及示範、決賽簡報及頒獎典禮</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small muted">十強專屬活動日期由中電與學校另行確定。</p>
+    </div>
+  </div>
+
+  <h3>比賽流程</h3>
+  <ol class="steps p">
+    <li><div><b>初賽：計劃書及原型概念圖（2/1 截止）</b>說明方案構思、技術應用及預期成效。概念圖可為手繪草圖、流程圖、介面設計圖等；毋須實體原型。專業評審選出十強。</div></li>
+    <li><div><b>十強支援（3–5 月）</b>HK$10,000 原型開發資助；到校 AI 工作坊；參觀龍鼓灘發電廠；電力質量工作坊；參觀 Grid-V 狀態監測中心；與業界專家會面一次，就方案設計、技術應用、可行性及原型開發給意見。</div></li>
+    <li><div><b>最終報告（6 月底）</b>遞交最終報告書及作品簡報。</div></li>
+    <li><div><b>決賽（7 月上旬）</b>向評審團簡報、展示原型及示範成果，角逐冠、亞、季軍及特別獎。</div></li>
+  </ol>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>初賽評分</h3>
+      <div class="bars p wide">
+        <div class="bar-row"><span>創新程度</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="v">50%</span></div>
+        <div class="bar-row"><span>科技應用</span><div class="bar-track"><div class="bar-fill" style="width:50%"></div></div><span class="v">25%</span></div>
+        <div class="bar-row"><span>成效及可行性</span><div class="bar-track"><div class="bar-fill" style="width:30%"></div></div><span class="v">15%</span></div>
+        <div class="bar-row"><span>計劃書質素</span><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div><span class="v">10%</span></div>
+      </div>
+      <p class="small">創新程度佔一半：初賽要靠獨特構思取勝，技術可以未做出來，但要說得清楚可行。</p>
+    </div>
+    <div class="card">
+      <h3>決賽評分</h3>
+      <div class="bars p wide">
+        <div class="bar-row"><span>原型設計及完成度</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="v">35%</span></div>
+        <div class="bar-row"><span>創新程度</span><div class="bar-track"><div class="bar-fill" style="width:57%"></div></div><span class="v">20%</span></div>
+        <div class="bar-row"><span>科技應用</span><div class="bar-track"><div class="bar-fill" style="width:57%"></div></div><span class="v">20%</span></div>
+        <div class="bar-row"><span>成效及可行性</span><div class="bar-track"><div class="bar-fill" style="width:43%"></div></div><span class="v">15%</span></div>
+        <div class="bar-row"><span>表達能力</span><div class="bar-track"><div class="bar-fill" style="width:29%"></div></div><span class="v">10%</span></div>
+      </div>
+      <p class="small">決賽重點轉為原型完成度（35%），十強資助要用在可示範的原型上。</p>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="stack">
+      <h3>獎項</h3>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>獎項</th><th>獎品</th></tr></thead>
+          <tbody>
+            <tr><td class="nowrap"><b>冠軍</b></td><td>獎盃及 HK$20,000 禮券</td></tr>
+            <tr><td class="nowrap"><b>亞軍</b></td><td>獎盃及 HK$15,000 禮券</td></tr>
+            <tr><td class="nowrap"><b>季軍</b></td><td>獎盃及 HK$10,000 禮券</td></tr>
+            <tr><td class="nowrap"><b>最具創意獎</b></td><td>獎盃及 HK$5,000 禮券</td></tr>
+            <tr><td class="nowrap"><b>優異獎</b></td><td>證書</td></tr>
+            <tr><td class="nowrap">全部隊員</td><td>電子參與證書</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="stack">
+      <h3>延伸學習活動（參賽學校）</h3>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>活動</th><th>內容</th><th class="nowrap">名額</th></tr></thead>
+          <tbody>
+            <tr><td class="nowrap"><b>「校園工程師」校園講座</b></td><td>中電工程師到校講解電力、節能減碳、極端天氣的挑戰，以及工程師入行門檻、職業生涯及前景</td><td class="nowrap">50 個</td></tr>
+            <tr><td class="nowrap"><b>中電學院創新電力館</b></td><td>了解創新能源科技如何推動智慧城市發展</td><td class="nowrap">10 間學校</td></tr>
+            <tr><td class="nowrap"><b>中電鐘樓文化館</b></td><td>了解香港電力發展歷程</td><td class="nowrap">10 間學校</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small muted">2026-11-18 至 2027-07-15 舉行；先到先得，每校每項參觀只可參加一次。</p>
+    </div>
+  </div>
+
+  <h3>方案方向（對應比賽範疇）</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th class="nowrap">方向</th><th>範疇</th><th>構思</th><th>技術</th><th>決賽原型</th></tr></thead>
+      <tbody>
+        <tr><td class="nowrap"><b>D-1 颱風暴雨供電預警</b></td><td>極端天氣應對</td><td>結合風速、雨量、水位及溫度數據，預測北區低窪地區變電站及架空電纜的停電風險，提早調度維修隊</td><td>IoT 感測、大數據、AI 預測</td><td>感測器模型 + 風險地圖儀表板</td></tr>
+        <tr><td class="nowrap"><b>D-2 無人機 AI 巡線</b></td><td>設備巡檢</td><td>無人機拍攝電纜塔及絕緣子，AI 辨識損壞、鏽蝕及樹木過近，自動生成巡檢報告</td><td>電腦視覺、機械人</td><td>影像辨識模型 + 示範影片（可結合無人機學會）</td></tr>
+        <tr><td class="nowrap"><b>D-3 變壓器聽診器</b></td><td>預測性維護</td><td>以溫度、聲音及振動數據訓練 AI，在變壓器故障前偵測異常聲紋，提早安排維修</td><td>聲音 AI、IoT</td><td>感測器裝置 + 異常偵測模型</td></tr>
+        <tr><td class="nowrap"><b>D-4 屋邨削峰管家</b></td><td>能源管理、再生能源整合</td><td>按電網負荷及天台太陽能發電量，在用電高峰自動調節公共空間照明、抽水泵及電動車充電</td><td>IoT、數據分析、自動控制</td><td>屋邨模型 + 負荷曲線前後對比</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout p">
+    <h4>LPS 參賽策略</h4>
+    <ul>
+      <li><b>隊伍</b>：只限初中；如 AIoT 隊的 4 名學生屬中一至中三，可另組 3–5 人隊伍參加。每位學生在此比賽只可參加一隊，但可同時參加其他比賽。</li>
+      <li><b>初賽負擔輕</b>：只交計劃書及概念圖，適合用作「先試題目」；入十強才製作原型，屆時有 HK$10,000 資助，可購買自有硬件，毋須依賴小米借用設備。</li>
+      <li><b>與其他比賽錯開</b>：2/1 中電計劃書、2/28 創科展作品、3/5 AIoT 作品，三個截止日相隔不足五星期；建議 1 月中前完成中電計劃書初稿。</li>
+      <li><b>六月撞期</b>：6 月底中電最終報告與 6/26–27 創科展展覽重疊，如兩邊都入圍，要預早分工。</li>
+      <li><b>題目互通</b>：AIoT 方案 2-B 水浸哨站、2-C 熱壓力網、3-C 數據中心能源管家的研究，可轉為 D-1、D-4 的電網角度，但兩邊作品要有不同重點，避免抵觸 AIoT「原創並未經發佈」規定。</li>
+    </ul>
+  </div>
+</section>
+
 <!-- ============ LINKS ============ -->
 <section class="sec" id="links">
   <div class="sec-head">
     <span class="k">LINKS</span>
     <h2>報名及繳交連結總表</h2>
   </div>
-  <div class="grid2">
+  <div class="grid2 two">
     <div class="stack">
       <span class="tag a">A · 學生比賽</span>
       <div class="links">
@@ -1477,6 +1657,18 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
       <div class="copyline"><code>enquiry@hksciencefair.org.hk</code><button class="btn" data-copy="enquiry@hksciencefair.org.hk">複製查詢電郵</button></div>
       <div class="copyline"><code>9026 3169（電話及 WhatsApp）</code><button class="btn" data-copy="9026 3169">複製查詢電話</button></div>
     </div>
+    <div class="stack">
+      <span class="tag p">D · 中電挑戰賽</span>
+      <div class="links">
+        <a class="link keyp" href="https://forms.gle/qgj6mWLPnvUz2CyX8" target="_blank" rel="noopener"><b>報名表（12/18 23:59 截止）</b><span>forms.gle/qgj6mWLPnvUz2CyX8</span><i>報名</i></a>
+        <a class="link" href="https://www.clp.com.hk/zh/education-development/engineer-in-school-programme" target="_blank" rel="noopener"><b>中電「校園工程師」計劃頁</b><span>clp.com.hk/zh/education-development/engineer-in-school-programme</span><i>網站</i></a>
+        <a class="link" href="https://www.stheadline.com/theme/clp_eis2026" target="_blank" rel="noopener"><b>星島比賽專頁（詳情及更新）</b><span>stheadline.com/theme/clp_eis2026</span><i>網站</i></a>
+        <a class="link" href="https://www.stheadline.com/ad-info/3630517/" target="_blank" rel="noopener"><b>比賽形式、參賽資格及重要日子</b><span>stheadline.com/ad-info/3630517</span><i>網站</i></a>
+        <a class="link" href="https://www.clp.com.hk/content/dam/clphk/documents/PICS%20CLP%20EIS2026_chi.pdf" target="_blank" rel="noopener"><b>個人資料收集聲明</b><span>clp.com.hk · PDF</span><i>PDF</i></a>
+      </div>
+      <div class="copyline"><code>clp_eis2026@singtaonewscorp.com</code><button class="btn" data-copy="clp_eis2026@singtaonewscorp.com">複製查詢電郵</button></div>
+      <div class="copyline"><code>6733 6400</code><button class="btn" data-copy="6733 6400">複製查詢電話</button></div>
+    </div>
   </div>
 </section>
 
@@ -1487,7 +1679,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
     <h2>待確認事項</h2>
     <p class="sub">官方資料未有答案，建議在工作坊一或致電查詢。</p>
   </div>
-  <div class="grid2">
+  <div class="grid2 two">
     <div class="card">
       <span class="tag a">A · 學生比賽</span>
       <ol>
@@ -1518,11 +1710,21 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
         <li>學校提名程序：校方是否需要另外簽署提名</li>
       </ol>
     </div>
+    <div class="card">
+      <span class="tag p">D · 中電挑戰賽</span>
+      <ol>
+        <li>計劃書格式、字數或頁數、範本及提交方法（官方頁面未列明）</li>
+        <li>原型概念圖的檔案格式</li>
+        <li>校園講座及兩館參觀是否經同一報名表申請</li>
+        <li>11/24 網上簡介會有否錄影或簡報可索取</li>
+        <li>決賽日期及地點</li>
+      </ol>
+    </div>
   </div>
 </section>
 
 <footer>
-  <p>資料來源：城大比賽網站及《比賽詳情》章程（30 Oct 2026 版）、比賽簡介會簡報（20 Oct 2026，19 頁已逐頁核對）、小米設備介紹 PDF；Sayo 比賽頁及教師簡介會報名表；《香港創科展 2026-2027 比賽章程》（TC-2026.10.02）。北區痛點資料來源列於「痛點及方案」章節。最後更新 2026-11-23，一切以主辦單位最新公布為準。</p>
+  <p>資料來源：城大比賽網站及《比賽詳情》章程（30 Oct 2026 版）、比賽簡介會簡報（20 Oct 2026，19 頁已逐頁核對）、小米設備介紹 PDF；Sayo 比賽頁及教師簡介會報名表；《香港創科展 2026-2027 比賽章程》（TC-2026.10.02）；中電「校園工程師」計劃頁及星島比賽專頁。北區痛點資料來源列於「痛點及方案」章節。最後更新 2026-11-27，一切以主辦單位最新公布為準。</p>
 </footer>
 </main>
 
@@ -1545,7 +1747,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
   });
 
   // ---------- gantt ----------
-  var G0 = utc('2026-11-09'), G1 = utc('2027-07-20'), SPAN = G1 - G0;
+  var G0 = utc('2026-11-09'), G1 = utc('2027-07-31'), SPAN = G1 - G0;
   function pct(s){ return Math.max(0, Math.min(100, (utc(s) - G0) / SPAN * 100)); }
   function md(s){ var p=s.split('-'); return (+p[1])+'/'+(+p[2]); }
   var rows = [
@@ -1572,6 +1774,12 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
     {t:'公佈入圍隊伍', d:'4/2', ms:[['h','2027-04-02','入圍']]},
     {t:'工作坊 I、II（模擬簡報）', d:'5/6–8 · 5/20–22', bars:[['h','2027-05-06','2027-05-08'],['h','2027-05-20','2027-05-22']]},
     {t:'展覽、評審及頒獎（會展）', d:'6/25–27', bars:[['h','2027-06-25','2027-06-27']], ms:[['h','2027-06-27','頒獎']]},
+    {grp:'D　中電挑戰賽'},
+    {t:'報名（Google Form）', d:'10/27–12/18 23:59', bars:[['p','2026-11-09','2026-12-18']], ms:[['c','2026-12-18','報名截止']]},
+    {t:'計劃書及原型概念圖', d:'12/19–2/1', bars:[['p','2026-12-19','2027-01-30']], ms:[['c','2027-02-01','計劃書截止']]},
+    {t:'公布十強', d:'3 月初', ms:[['p','2027-03-05','十強']]},
+    {t:'十強原型開發及指導', d:'3–5 月 · 5 月底指導', bars:[['p win','2027-03-08','2027-05-31']]},
+    {t:'最終報告及決賽', d:'6 月底報告 · 7 月上旬決賽', ms:[['p','2027-06-30',''],['p','2027-07-07','決賽']]},
     {grp:'校務及假期'},
     {t:'HKJPSMC（LPS 協辦）', d:'12/12', ms:[['g','2026-12-12','']]},
     {t:'農曆新年', d:'2027/2/6', ms:[['g','2027-02-06','']]}
